@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Dark World - Official Website</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Background Image Layer -->
+    <div class="bg-image-layer"></div>
+    
+    <!-- 3D Background Canvas -->
+    <canvas id="bgCanvas"></canvas>
+    
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <div class="logo-3d">
+                <span class="logo-text">THE DARK WORLD</span>
+            </div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home" class="nav-link">Home</a></li>
+            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#authors" class="nav-link">Authors</a></li>
+            <li><a href="#register" class="nav-link">Register</a></li>
+        </ul>
+        <div class="nav-auth">
+            <button id="loginBtn" class="btn-auth">Login</button>
+            <button id="logoutBtn" class="btn-auth hidden">Logout</button>
+        </div>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <ul class="mobile-nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#authors">Authors</a></li>
+            <li><a href="#register">Register</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-3d-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="title-word" data-delay="0">THE</span>
+                    <span class="title-word" data-delay="1">DARK</span>
+                    <span class="title-word" data-delay="2">WORLD</span>
+                </h1>
+                <p class="hero-subtitle">Enter the realm of darkness and discover your true power</p>
+                <div class="hero-buttons">
+                    <a href="#register" class="btn-primary">Join Now</a>
+                    <a href="#about" class="btn-secondary">Explore</a>
+                </div>
+            </div>
+            <!-- 3D Sword Element -->
+            <div class="hero-3d-element">
+                <div class="sword-container">
+                    <div class="sword-glow"></div>
+                    <img src="WhatsApp Image 2026-03-05 at 5.22.49 AM (2).jpeg" alt="Dark World Sword" class="sword-image" 
+                         onerror="this.style.display='none'; document.querySelector('.sword-fallback').style.display='flex';">
+                    <div class="sword-fallback" style="display: none;">
+                        <div class="sword-blade"></div>
+                        <div class="sword-handle"></div>
+                    </div>
+                    <!-- Sword Energy Effects -->
+                    <div class="sword-energy"></div>
+                    <div class="sword-particles"></div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll Down</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="section-container">
+            <h2 class="section-title">About <span class="highlight">The Dark World</span></h2>
+            <div class="about-content">
+                <div class="about-card about-card-1">
+                    <div class="card-icon">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                    <h3>The Story</h3>
+                    <p>The Dark World is an immersive experience that takes you into the depths of mystery and adventure. Explore uncharted territories and uncover secrets that lie within the shadows.</p>
+                </div>
+                <div class="about-card about-card-2">
+                    <div class="card-icon">
+                        <i class="fas fa-ghost"></i>
+                    </div>
+                    <h3>The Journey</h3>
+                    <p>Embark on an epic journey through dark realms, facing challenges that test your courage and wit. Every step reveals new mysteries waiting to be solved.</p>
+                </div>
+                <div class="about-card about-card-3">
+                    <div class="card-icon">
+                        <i class="fas fa-dragon"></i>
+                    </div>
+                    <h3>The Legend</h3>
+                    <p>Join our community of explorers and become part of a legend that spans generations. Your story begins here in The Dark World.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Authors Section -->
+    <section id="authors" class="authors-section">
+        <div class="section-container">
+            <h2 class="section-title">Meet Our <span class="highlight">Authors</span></h2>
+            <div class="authors-grid">
+                <div class="author-card author-card-1">
+                    <div class="author-image">
+                        <div class="author-avatar">
+                            <img src="assets/authors/Waleed Manzoor.png" alt="Waleed Manzoor" class="author-img">
+                        </div>
+                    </div>
+                    <div class="author-info">
+                        <h3>Waleed Manzoor</h3>
+                        <p class="author-role">Lead Creator & Visionary</p>
+                        <p class="author-bio">The mastermind behind The Dark World, Waleed brings imagination to life with his unique vision and creative storytelling abilities.</p>
+                        <div class="author-social">
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="author-card author-card-2">
+                    <div class="author-image">
+                        <div class="author-avatar">
+                            <img src="assets/authors/Adeeba Arif.jpeg" alt="Adeeba Arif" class="author-img">
+                        </div>
+                    </div>
+                    <div class="author-info">
+                        <h3>Adeeba Arif</h3>
+                        <p class="author-role">Creative Director & Writer</p>
+                        <p class="author-bio">Adeeba crafts the intricate narratives and characters that make The Dark World come alive with depth and emotion.</p>
+                        <div class="author-social">
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Register Section -->
+    <section id="register" class="register-section">
+        <div class="section-container">
+            <h2 class="section-title">Join <span class="highlight">The Dark World</span></h2>
+            <div class="register-container">
+                <div class="register-3d-card">
+                    <div class="register-form-wrapper">
+                        <h3>Create Your Account</h3>
+                        <form id="registerForm" class="register-form">
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <div class="input-wrapper">
+                                    <i class="fas fa-envelope"></i>
+                                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="whatsapp">WhatsApp Number</label>
+                                <div class="input-wrapper">
+                                    <i class="fab fa-whatsapp"></i>
+                                    <input type="tel" id="whatsapp" name="whatsapp" placeholder="Enter WhatsApp number" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <div class="input-wrapper">
+                                    <i class="fas fa-lock"></i>
+                                    <input type="password" id="password" name="password" placeholder="Create a password" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="confirmPassword">Confirm Password</label>
+                                <div class="input-wrapper">
+                                    <i class="fas fa-lock"></i>
+                                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-register">
+                                <span>Register Now</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </form>
+                        <div class="auth-divider">
+                            <span>or continue with</span>
+                        </div>
+                        <button id="googleAuth" class="btn-google">
+                            <i class="fab fa-google"></i>
+                            <span>Sign in with Google</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <h3>Welcome Back</h3>
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="loginEmail">Email Address</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="loginEmail" name="loginEmail" placeholder="Enter your email" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="loginPassword" name="loginPassword" placeholder="Enter your password" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn-login">
+                    <span>Login</span>
+                    <i class="fas fa-sign-in-alt"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- User Dashboard (Hidden by default) -->
+    <div id="dashboard" class="dashboard hidden">
+        <div class="dashboard-content">
+            <h3>Welcome, <span id="userName">User</span>!</h3>
+            <p>Your account is now active in The Dark World.</p>
+            <div class="user-info">
+                <p><strong>Email:</strong> <span id="userEmail"></span></p>
+                <p><strong>WhatsApp:</strong> <span id="userWhatsapp"></span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>THE DARK WORLD</h3>
+                    <p>Embrace the darkness, discover your power.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#authors">Authors</a></li>
+                        <li><a href="#register">Register</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact Us</h4>
+                    <p><i class="fas fa-envelope"></i> info@thedarkworld.com</p>
+                    <p><i class="fab fa-whatsapp"></i> +1 234 567 8900</p>
+                </div>
+                <div class="footer-social">
+                    <h4>Follow Us</h4>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 The Dark World. All rights reserved.</p>
+                <p>Created by <strong>Waleed Manzoor</strong> & <strong>Adeeba Arif</strong></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Assets Configuration -->
+    <script src="assets-config.js"></script>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js"></script>
+    
+    <!-- Main JavaScript -->
+    <script src="main.js"></script>
+</body>
+</html>
