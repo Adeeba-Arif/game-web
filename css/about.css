@@ -1,0 +1,431 @@
+/* ========================================
+   ABOUT PAGE STYLES
+   ======================================== */
+
+.about-page {
+    padding-top: 70px;
+}
+
+/* Hero Section */
+.about-hero {
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 100px 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.about-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, rgba(230, 57, 70, 0.2) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.about-hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.about-hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    color: var(--primary-red);
+    text-shadow: var(--shadow-red);
+    margin-bottom: 20px;
+    letter-spacing: 10px;
+    text-transform: uppercase;
+}
+
+.hero-tagline {
+    font-family: var(--font-heading);
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    color: var(--text-light);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+/* Story Section */
+.story-section {
+    padding: 80px 0;
+    background: var(--bg-dark-alpha);
+}
+
+.story-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.story-text p {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    line-height: 1.9;
+    margin-bottom: 20px;
+}
+
+.story-text strong {
+    color: var(--primary-red);
+    font-weight: 600;
+}
+
+.story-visual {
+    display: flex;
+    justify-content: center;
+}
+
+.visual-frame {
+    width: 300px;
+    height: 400px;
+    border: 3px solid var(--primary-red);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 30px rgba(230, 57, 70, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.visual-frame::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        rgba(230, 57, 70, 0.3) 60deg,
+        transparent 120deg
+    );
+    animation: frameRotate 10s linear infinite;
+}
+
+@keyframes frameRotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.frame-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+
+.frame-content i {
+    font-size: 8rem;
+    color: var(--primary-red);
+    text-shadow: var(--shadow-red);
+    animation: iconPulse 2s ease-in-out infinite;
+}
+
+@keyframes iconPulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+/* Mission Section */
+.mission-section {
+    padding: 80px 0;
+}
+
+.mission-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.mission-objective {
+    background: var(--bg-dark-alpha);
+    border: 1px solid rgba(230, 57, 70, 0.2);
+    border-radius: 10px;
+    padding: 40px 30px;
+    text-align: center;
+    transition: all var(--transition-medium);
+    position: relative;
+    overflow: hidden;
+}
+
+.mission-objective::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--gradient-blood);
+}
+
+.mission-objective:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-red);
+    box-shadow: var(--shadow-dark);
+}
+
+.objective-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 25px;
+    background: rgba(230, 57, 70, 0.1);
+    border: 2px solid var(--primary-red);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.objective-icon i {
+    font-size: 2rem;
+    color: var(--primary-red);
+}
+
+.mission-objective h3 {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    color: var(--text-white);
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+}
+
+.mission-objective p {
+    color: var(--text-light);
+    line-height: 1.7;
+}
+
+/* Features Section */
+.features-section {
+    padding: 80px 0;
+    background: var(--bg-dark-alpha);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.feature-card {
+    background: var(--bg-card);
+    border: 1px solid rgba(230, 57, 70, 0.2);
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+    transition: all var(--transition-medium);
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-red);
+}
+
+.feature-icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 20px;
+    background: rgba(230, 57, 70, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feature-icon i {
+    font-size: 1.8rem;
+    color: var(--primary-red);
+}
+
+.feature-card h3 {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    color: var(--text-white);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.feature-card p {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+/* Weapons Section */
+.weapons-section {
+    padding: 80px 0;
+}
+
+.weapons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.weapon-card {
+    background: var(--bg-dark-alpha);
+    border: 1px solid rgba(230, 57, 70, 0.2);
+    border-radius: 8px;
+    padding: 25px;
+    text-align: center;
+    transition: all var(--transition-medium);
+}
+
+.weapon-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-red);
+    box-shadow: var(--shadow-dark);
+}
+
+.weapon-image {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    background: rgba(230, 57, 70, 0.1);
+    border: 2px solid var(--metal-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.weapon-image i {
+    font-size: 2rem;
+    color: var(--primary-red);
+}
+
+.weapon-image.legendary {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(184, 134, 11, 0.2));
+    border-color: var(--accent-gold);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+.weapon-image.legendary i {
+    color: var(--accent-gold);
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.weapon-card h3 {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    color: var(--text-white);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.weapon-card p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.weapon-rarity {
+    display: inline-block;
+    padding: 5px 15px;
+    font-family: var(--font-heading);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    border-radius: 3px;
+}
+
+.weapon-rarity.common {
+    background: rgba(150, 150, 150, 0.2);
+    color: #999999;
+    border: 1px solid #999999;
+}
+
+.weapon-rarity.uncommon {
+    background: rgba(57, 255, 20, 0.2);
+    color: var(--accent-toxic);
+    border: 1px solid var(--accent-toxic);
+}
+
+.weapon-rarity.rare {
+    background: rgba(52, 152, 219, 0.2);
+    color: #3498db;
+    border: 1px solid #3498db;
+}
+
+.weapon-rarity.epic {
+    background: rgba(155, 89, 182, 0.2);
+    color: #9b59b6;
+    border: 1px solid #9b59b6;
+}
+
+.weapon-rarity.legendary {
+    background: rgba(255, 215, 0, 0.2);
+    color: var(--accent-gold);
+    border: 1px solid var(--accent-gold);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+    animation: legendaryGlow 2s ease-in-out infinite;
+}
+
+@keyframes legendaryGlow {
+    0%, 100% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
+    50% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.6); }
+}
+
+/* CTA Section */
+.cta-section {
+    padding: 100px 20px;
+    text-align: center;
+    background: linear-gradient(180deg, transparent, rgba(230, 57, 70, 0.1), transparent);
+}
+
+.cta-content h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: var(--text-white);
+    margin-bottom: 15px;
+    letter-spacing: 5px;
+}
+
+.cta-content p {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    margin-bottom: 30px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .story-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .story-visual {
+        order: -1;
+    }
+    
+    .visual-frame {
+        width: 250px;
+        height: 300px;
+    }
+    
+    .frame-content i {
+        font-size: 5rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .about-hero h1 {
+        letter-spacing: 5px;
+    }
+    
+    .mission-grid,
+    .features-grid,
+    .weapons-grid {
+        grid-template-columns: 1fr;
+    }
+}

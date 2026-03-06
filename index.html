@@ -3,36 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Dark World - Official Website</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>ZOMBIE SURVIVAL - Official Game Website</title>
+    <link rel="stylesheet" href="css/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <!-- Preloader -->
+    <div id="preloader" class="preloader">
+        <div class="preloader-content">
+            <div class="zombie-silhouettes">
+                <div class="zombie-silhouette zombie-1"></div>
+                <div class="zombie-silhouette zombie-2"></div>
+                <div class="zombie-silhouette zombie-3"></div>
+            </div>
+            <div class="loading-text">
+                <span class="loading-char">L</span>
+                <span class="loading-char">O</span>
+                <span class="loading-char">A</span>
+                <span class="loading-char">D</span>
+                <span class="loading-char">I</span>
+                <span class="loading-char">N</span>
+                <span class="loading-char">G</span>
+            </div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fog Overlay -->
+    <div class="fog-overlay">
+        <div class="fog-layer fog-layer-1"></div>
+        <div class="fog-layer fog-layer-2"></div>
+    </div>
+
+    <!-- Particle Effects Container -->
+    <div class="particles-container" id="particles"></div>
+
     <!-- Background Image Layer -->
     <div class="bg-image-layer"></div>
     
+    <!-- Parallax Background -->
+    <div class="parallax-bg" id="parallaxBg">
+        <div class="parallax-layer parallax-layer-1" data-speed="0.1"></div>
+        <div class="parallax-layer parallax-layer-2" data-speed="0.3"></div>
+        <div class="parallax-layer parallax-layer-3" data-speed="0.5"></div>
+    </div>
+    
     <!-- 3D Background Canvas -->
     <canvas id="bgCanvas"></canvas>
-    
+
     <!-- Navigation -->
     <nav class="navbar">
         <div class="logo">
             <div class="logo-3d">
-                <span class="logo-text">THE DARK WORLD</span>
+                <span class="logo-icon"><i class="fas fa-skull-crossbones"></i></span>
+                <span class="logo-text glitch" data-text="Z-SURVIVAL">Z-SURVIVAL</span>
             </div>
         </div>
         <ul class="nav-links">
-            <li><a href="#home" class="nav-link">Home</a></li>
-            <li><a href="#about" class="nav-link">About</a></li>
-            <li><a href="#authors" class="nav-link">Authors</a></li>
-            <li><a href="#register" class="nav-link">Register</a></li>
+            <li><a href="#home" class="nav-link active" data-page="home">
+                <span class="nav-icon"><i class="fas fa-home"></i></span>
+                <span>Home</span>
+            </a></li>
+            <li><a href="pages/game.html" class="nav-link" data-page="game">
+                <span class="nav-icon"><i class="fas fa-crosshairs"></i></span>
+                <span>Play</span>
+            </a></li>
+            <li><a href="pages/profile.html" class="nav-link" data-page="profile">
+                <span class="nav-icon"><i class="fas fa-user-alt"></i></span>
+                <span>Profile</span>
+            </a></li>
+            <li><a href="pages/about.html" class="nav-link" data-page="about">
+                <span class="nav-icon"><i class="fas fa-info-circle"></i></span>
+                <span>About</span>
+            </a></li>
         </ul>
         <div class="nav-auth">
-            <button id="loginBtn" class="btn-auth">Login</button>
-            <button id="logoutBtn" class="btn-auth hidden">Logout</button>
+            <div class="user-info-mini" id="userInfoMini">
+                <span class="user-level">LVL <span id="userLevel">1</span></span>
+                <span class="user-score"><i class="fas fa-trophy"></i> <span id="userScore">0</span></span>
+            </div>
+            <button id="loginBtn" class="btn-auth"><i class="fas fa-sign-in-alt"></i> Login</button>
+            <button id="logoutBtn" class="btn-auth hidden"><i class="fas fa-sign-out-alt"></i> Logout</button>
         </div>
         <div class="hamburger">
             <span></span>
@@ -44,256 +100,374 @@
     <!-- Mobile Menu -->
     <div class="mobile-menu">
         <ul class="mobile-nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#authors">Authors</a></li>
-            <li><a href="#register">Register</a></li>
+            <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="pages/game.html"><i class="fas fa-crosshairs"></i> Play Game</a></li>
+            <li><a href="pages/profile.html"><i class="fas fa-user-alt"></i> Profile</a></li>
+            <li><a href="pages/about.html"><i class="fas fa-info-circle"></i> About</a></li>
         </ul>
     </div>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero-section">
-        <div class="hero-3d-container">
-            <div class="hero-content">
-                <h1 class="hero-title">
-                    <span class="title-word" data-delay="0">THE</span>
-                    <span class="title-word" data-delay="1">DARK</span>
-                    <span class="title-word" data-delay="2">WORLD</span>
-                </h1>
-                <p class="hero-subtitle">Enter the realm of darkness and discover your true power</p>
-                <div class="hero-buttons">
-                    <a href="#register" class="btn-primary">Join Now</a>
-                    <a href="#about" class="btn-secondary">Explore</a>
-                </div>
-            </div>
-            <!-- 3D Sword Element -->
-            <div class="hero-3d-element">
-                <div class="sword-container">
-                    <div class="sword-glow"></div>
-                    <img src="WhatsApp Image 2026-03-05 at 5.22.49 AM (2).jpeg" alt="Dark World Sword" class="sword-image" 
-                         onerror="this.style.display='none'; document.querySelector('.sword-fallback').style.display='flex';">
-                    <div class="sword-fallback" style="display: none;">
-                        <div class="sword-blade"></div>
-                        <div class="sword-handle"></div>
+    <!-- Main Content Pages -->
+    <main class="main-content">
+        <!-- Home Page -->
+        <section id="home" class="page-section active" data-page="home">
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <div class="hero-container">
+                    <div class="hero-content">
+                        <div class="hero-badge">
+                            <span class="badge-text">OFFICIAL GAME PORTAL</span>
+                        </div>
+                        <h1 class="hero-title">
+                            <span class="title-line title-line-1 glitch" data-text="SURVIVE">SURVIVE</span>
+                            <span class="title-line title-line-2 glitch" data-text="THE HORDE">THE HORDE</span>
+                        </h1>
+                        <p class="hero-subtitle">The world has fallen. Humanity's last stand begins NOW. Join the resistance and fight for survival in the ultimate zombie apocalypse experience.</p>
+                        <div class="hero-buttons">
+                            <a href="pages/game.html" class="btn-primary btn-play">
+                                <span class="btn-icon"><i class="fas fa-play"></i></span>
+                                <span class="btn-text">PLAY NOW</span>
+                                <span class="btn-glow"></span>
+                            </a>
+                            <a href="pages/about.html" class="btn-secondary">
+                                <span class="btn-text">MISSION BRIEF</span>
+                                <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
+                            </a>
+                        </div>
+                        <div class="hero-stats">
+                            <div class="stat-item">
+                                <span class="stat-value" data-count="1000000">0</span>
+                                <span class="stat-label">Survivors</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value" data-count="50000">0</span>
+                                <span class="stat-label">Active Players</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value" data-count="1000">0</span>
+                                <span class="stat-label">Zombies Killed</span>
+                            </div>
+                        </div>
                     </div>
-                    <!-- Sword Energy Effects -->
-                    <div class="sword-energy"></div>
-                    <div class="sword-particles"></div>
                 </div>
-            </div>
-        </div>
-        <div class="scroll-indicator">
-            <span>Scroll Down</span>
-            <i class="fas fa-chevron-down"></i>
-        </div>
-    </section>
+                <div class="scroll-indicator">
+                    <span>SCROLL FOR MORE</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </section>
 
-    <!-- About Section -->
-    <section id="about" class="about-section">
-        <div class="section-container">
-            <h2 class="section-title">About <span class="highlight">The Dark World</span></h2>
-            <div class="about-content">
-                <div class="about-card about-card-1">
-                    <div class="card-icon">
-                        <i class="fas fa-moon"></i>
-                    </div>
-                    <h3>The Story</h3>
-                    <p>The Dark World is an immersive experience that takes you into the depths of mystery and adventure. Explore uncharted territories and uncover secrets that lie within the shadows.</p>
-                </div>
-                <div class="about-card about-card-2">
-                    <div class="card-icon">
-                        <i class="fas fa-ghost"></i>
-                    </div>
-                    <h3>The Journey</h3>
-                    <p>Embark on an epic journey through dark realms, facing challenges that test your courage and wit. Every step reveals new mysteries waiting to be solved.</p>
-                </div>
-                <div class="about-card about-card-3">
-                    <div class="card-icon">
-                        <i class="fas fa-dragon"></i>
-                    </div>
-                    <h3>The Legend</h3>
-                    <p>Join our community of explorers and become part of a legend that spans generations. Your story begins here in The Dark World.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Authors Section -->
-    <section id="authors" class="authors-section">
-        <div class="section-container">
-            <h2 class="section-title">Meet Our <span class="highlight">Authors</span></h2>
-            <div class="authors-grid">
-                <div class="author-card author-card-1">
-                    <div class="author-image">
-                        <div class="author-avatar">
-                            <img src="assets/authors/Waleed Manzoor.png" alt="Waleed Manzoor" class="author-img">
-                        </div>
-                    </div>
-                    <div class="author-info">
-                        <h3>Waleed Manzoor</h3>
-                        <p class="author-role">Lead Creator & Visionary</p>
-                        <p class="author-bio">The mastermind behind The Dark World, Waleed brings imagination to life with his unique vision and creative storytelling abilities.</p>
-                        <div class="author-social">
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fab fa-linkedin"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="author-card author-card-2">
-                    <div class="author-image">
-                        <div class="author-avatar">
-                            <img src="assets/authors/Adeeba Arif.jpeg" alt="Adeeba Arif" class="author-img">
-                        </div>
-                    </div>
-                    <div class="author-info">
-                        <h3>Adeeba Arif</h3>
-                        <p class="author-role">Creative Director & Writer</p>
-                        <p class="author-bio">Adeeba crafts the intricate narratives and characters that make The Dark World come alive with depth and emotion.</p>
-                        <div class="author-social">
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fab fa-linkedin"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Register Section -->
-    <section id="register" class="register-section">
-        <div class="section-container">
-            <h2 class="section-title">Join <span class="highlight">The Dark World</span></h2>
-            <div class="register-container">
-                <div class="register-3d-card">
-                    <div class="register-form-wrapper">
-                        <h3>Create Your Account</h3>
-                        <form id="registerForm" class="register-form">
-                            <div class="form-group">
-                                <label for="email">Email Address</label>
-                                <div class="input-wrapper">
-                                    <i class="fas fa-envelope"></i>
-                                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            <!-- News Section -->
+            <section class="news-section">
+                <div class="section-container">
+                    <h2 class="section-title">
+                        <span class="title-icon"><i class="fas fa-newspaper"></i></span>
+                        SURVIVAL NEWS
+                        <span class="title-decoration"></span>
+                    </h2>
+                    <div class="news-grid">
+                        <article class="news-card news-featured">
+                            <div class="news-image">
+                                <img src="assets/WhatsApp Image 2026-03-05 at 5.22.49 AM.jpeg" alt="News" onerror="this.style.display='none'">
+                                <div class="news-category">BREAKING</div>
+                            </div>
+                            <div class="news-content">
+                                <h3>New Horde Mode: Dead City</h3>
+                                <p>Face the largest horde ever assembled. The undead have taken over the city and only the bravest survivors can reclaim it.</p>
+                                <div class="news-meta">
+                                    <span><i class="fas fa-calendar"></i> MAR 06, 2026</span>
+                                    <span><i class="fas fa-user"></i> COMMAND</span>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="whatsapp">WhatsApp Number</label>
-                                <div class="input-wrapper">
-                                    <i class="fab fa-whatsapp"></i>
-                                    <input type="tel" id="whatsapp" name="whatsapp" placeholder="Enter WhatsApp number" required>
+                        </article>
+                        <article class="news-card">
+                            <div class="news-content">
+                                <h3>Weapon Pack: Heavy Artillery</h3>
+                                <p>New weapons added to the armory. Machine guns, rocket launchers, and more.</p>
+                                <div class="news-meta">
+                                    <span><i class="fas fa-calendar"></i> MAR 05, 2026</span>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="password">Password</label>
-                                <div class="input-wrapper">
-                                    <i class="fas fa-lock"></i>
-                                    <input type="password" id="password" name="password" placeholder="Create a password" required>
+                        </article>
+                        <article class="news-card">
+                            <div class="news-content">
+                                <h3>Server Record: 50K Players</h3>
+                                <p>Our community has grown to 50,000 simultaneous players. Thank you for surviving with us!</p>
+                                <div class="news-meta">
+                                    <span><i class="fas fa-calendar"></i> MAR 04, 2026</span>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="confirmPassword">Confirm Password</label>
-                                <div class="input-wrapper">
-                                    <i class="fas fa-lock"></i>
-                                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
-                                </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Missions Section -->
+            <section class="missions-section">
+                <div class="section-container">
+                    <h2 class="section-title">
+                        <span class="title-icon"><i class="fas fa-tasks"></i></span>
+                        SURVIVAL MISSIONS
+                        <span class="title-decoration"></span>
+                    </h2>
+                    <div class="missions-grid">
+                        <div class="mission-card">
+                            <div class="mission-header">
+                                <span class="mission-difficulty easy">EASY</span>
+                                <span class="mission-reward"><i class="fas fa-coins"></i> 100 XP</span>
                             </div>
-                            <button type="submit" class="btn-register">
-                                <span>Register Now</span>
-                                <i class="fas fa-arrow-right"></i>
-                            </button>
-                        </form>
-                        <div class="auth-divider">
-                            <span>or continue with</span>
+                            <div class="mission-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <h3>Safe House</h3>
+                            <p>Locate the nearest safe house and secure it from zombie intrusion.</p>
+                            <button class="btn-mission">ACCEPT MISSION</button>
                         </div>
-                        <button id="googleAuth" class="btn-google">
-                            <i class="fab fa-google"></i>
-                            <span>Sign in with Google</span>
-                        </button>
+                        <div class="mission-card">
+                            <div class="mission-header">
+                                <span class="mission-difficulty medium">MEDIUM</span>
+                                <span class="mission-reward"><i class="fas fa-coins"></i> 250 XP</span>
+                            </div>
+                            <div class="mission-icon">
+                                <i class="fas fa-bomb"></i>
+                            </div>
+                            <h3>Supply Drop</h3>
+                            <p>Retrieve the supply drop before the horde arrives. Speed is essential.</p>
+                            <button class="btn-mission">ACCEPT MISSION</button>
+                        </div>
+                        <div class="mission-card">
+                            <div class="mission-header">
+                                <span class="mission-difficulty hard">HARD</span>
+                                <span class="mission-reward"><i class="fas fa-coins"></i> 500 XP</span>
+                            </div>
+                            <div class="mission-icon">
+                                <i class="fas fa-skull"></i>
+                            </div>
+                            <h3>Horde Boss</h3>
+                            <p>Defeat the Horde Leader and earn legendary rewards. Requires team of 4+.</p>
+                            <button class="btn-mission">ACCEPT MISSION</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
+            </section>
 
-    <!-- Login Modal -->
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <span class="modal-close">&times;</span>
-            <h3>Welcome Back</h3>
-            <form id="loginForm" class="login-form">
-                <div class="form-group">
-                    <label for="loginEmail">Email Address</label>
-                    <div class="input-wrapper">
-                        <i class="fas fa-envelope"></i>
-                        <input type="email" id="loginEmail" name="loginEmail" placeholder="Enter your email" required>
+            <!-- Achievements Preview -->
+            <section class="achievements-section">
+                <div class="section-container">
+                    <h2 class="section-title">
+                        <span class="title-icon"><i class="fas fa-medal"></i></span>
+                        ACHIEVEMENTS
+                        <span class="title-decoration"></span>
+                    </h2>
+                    <div class="achievements-grid">
+                        <div class="achievement-badge">
+                            <div class="badge-icon bronze">
+                                <i class="fas fa-kill"></i>
+                            </div>
+                            <span class="badge-name">First Blood</span>
+                            <span class="badge-desc">Kill your first zombie</span>
+                        </div>
+                        <div class="achievement-badge">
+                            <div class="badge-icon silver">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <span class="badge-name">Team Player</span>
+                            <span class="badge-desc">Play with 5 different players</span>
+                        </div>
+                        <div class="achievement-badge">
+                            <div class="badge-icon gold">
+                                <i class="fas fa-crown"></i>
+                            </div>
+                            <span class="badge-name">Survivor</span>
+                            <span class="badge-desc">Survive 100 waves</span>
+                        </div>
+                        <div class="achievement-badge locked">
+                            <div class="badge-icon locked">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <span class="badge-name">???</span>
+                            <span class="badge-desc">Complete more missions</span>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="loginPassword">Password</label>
-                    <div class="input-wrapper">
-                        <i class="fas fa-lock"></i>
-                        <input type="password" id="loginPassword" name="loginPassword" placeholder="Enter your password" required>
-                    </div>
-                </div>
-                <button type="submit" class="btn-login">
-                    <span>Login</span>
-                    <i class="fas fa-sign-in-alt"></i>
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <!-- User Dashboard (Hidden by default) -->
-    <div id="dashboard" class="dashboard hidden">
-        <div class="dashboard-content">
-            <h3>Welcome, <span id="userName">User</span>!</h3>
-            <p>Your account is now active in The Dark World.</p>
-            <div class="user-info">
-                <p><strong>Email:</strong> <span id="userEmail"></span></p>
-                <p><strong>WhatsApp:</strong> <span id="userWhatsapp"></span></p>
-            </div>
-        </div>
-    </div>
+            </section>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <h3>THE DARK WORLD</h3>
-                    <p>Embrace the darkness, discover your power.</p>
+                    <div class="footer-logo-icon">
+                        <i class="fas fa-skull-crossbones"></i>
+                    </div>
+                    <h3>Z-SURVIVAL</h3>
+                    <p>Humanity's last hope. Fight or become one of them.</p>
                 </div>
                 <div class="footer-links">
-                    <h4>Quick Links</h4>
+                    <h4><i class="fas fa-link"></i> Quick Links</h4>
                     <ul>
                         <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#authors">Authors</a></li>
-                        <li><a href="#register">Register</a></li>
+                        <li><a href="pages/game.html">Play Game</a></li>
+                        <li><a href="pages/profile.html">Profile</a></li>
+                        <li><a href="pages/about.html">About</a></li>
                     </ul>
                 </div>
                 <div class="footer-contact">
-                    <h4>Contact Us</h4>
-                    <p><i class="fas fa-envelope"></i> info@thedarkworld.com</p>
-                    <p><i class="fab fa-whatsapp"></i> +1 234 567 8900</p>
+                    <h4><i class="fas fa-headset"></i> Support</h4>
+                    <p><i class="fas fa-envelope"></i> survive@zsurvival.com</p>
+                    <p><i class="fab fa-discord"></i> Join Discord</p>
                 </div>
                 <div class="footer-social">
-                    <h4>Follow Us</h4>
+                    <h4><i class="fas fa-share-alt"></i> Follow Us</h4>
                     <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-discord"></i></a>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 The Dark World. All rights reserved.</p>
-                <p>Created by <strong>Waleed Manzoor</strong> & <strong>Adeeba Arif</strong></p>
+                <p>&copy; 2026 Z-SURVIVAL. All rights reserved.</p>
+                <p>A product of <strong>Waleed Manzoor</strong> & <strong>Adeeba Arif</strong></p>
             </div>
         </div>
     </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div class="modal-header">
+                <i class="fas fa-user-shield"></i>
+                <h3>SURVIVOR LOGIN</h3>
+            </div>
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="loginEmail">Email Address</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="loginEmail" name="loginEmail" placeholder="survivor@email.com" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="loginPassword" name="loginPassword" placeholder="Enter password" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn-login">
+                    <span><i class="fas fa-sign-in-alt"></i> LOGIN</span>
+                </button>
+            </form>
+            <div class="auth-divider">
+                <span>or continue with</span>
+            </div>
+            <button id="googleAuth" class="btn-google">
+                <i class="fab fa-google"></i>
+                <span>Sign in with Google</span>
+            </button>
+            <div class="auth-divider">
+                <span>new survivor?</span>
+            </div>
+            <button id="showRegister" class="btn-register-switch">
+                <span><i class="fas fa-user-plus"></i> CREATE ACCOUNT</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close register-close">&times;</span>
+            <div class="modal-header">
+                <i class="fas fa-user-plus"></i>
+                <h3>JOIN THE RESISTANCE</h3>
+            </div>
+            <form id="registerForm" class="register-form">
+                <div class="form-group">
+                    <label for="regEmail">Email Address</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="regEmail" name="regEmail" placeholder="survivor@email.com" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="regWhatsapp">WhatsApp Number</label>
+                    <div class="input-wrapper">
+                        <i class="fab fa-whatsapp"></i>
+                        <input type="tel" id="regWhatsapp" name="regWhatsapp" placeholder="+1 234 567 8900" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">Password</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="regPassword" name="regPassword" placeholder="Create password" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="regConfirmPassword">Confirm Password</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="regConfirmPassword" name="regConfirmPassword" placeholder="Confirm password" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn-register">
+                    <span><i class="fas fa-user-plus"></i> REGISTER</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- User Dashboard Panel -->
+    <div id="dashboard" class="dashboard-panel hidden">
+        <div class="dashboard-header">
+            <div class="dashboard-user">
+                <div class="user-avatar">
+                    <i class="fas fa-user-astronaut"></i>
+                </div>
+                <div class="user-details">
+                    <h4 id="userName">Survivor</h4>
+                    <span class="user-rank">Private</span>
+                </div>
+            </div>
+            <button class="dashboard-close" id="closeDashboard">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="dashboard-stats">
+            <div class="dashboard-stat">
+                <i class="fas fa-trophy"></i>
+                <span class="stat-label">Score</span>
+                <span class="stat-value" id="dashScore">0</span>
+            </div>
+            <div class="dashboard-stat">
+                <i class="fas fa-skull"></i>
+                <span class="stat-label">Kills</span>
+                <span class="stat-value" id="dashKills">0</span>
+            </div>
+            <div class="dashboard-stat">
+                <i class="fas fa-clock"></i>
+                <span class="stat-label">Play Time</span>
+                <span class="stat-value" id="dashTime">0h</span>
+            </div>
+        </div>
+        <div class="dashboard-actions">
+            <a href="pages/game.html" class="dashboard-btn">
+                <i class="fas fa-play"></i> Play Now
+            </a>
+            <a href="pages/profile.html" class="dashboard-btn">
+                <i class="fas fa-user"></i> Profile
+            </a>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toastContainer" class="toast-container"></div>
 
     <!-- Assets Configuration -->
     <script src="assets-config.js"></script>
@@ -303,7 +477,10 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js"></script>
     
+    <!-- Firebase Config -->
+    <script src="firebase-config.js"></script>
+    
     <!-- Main JavaScript -->
-    <script src="main.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>

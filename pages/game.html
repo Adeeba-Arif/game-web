@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play Game - Z-SURVIVAL</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/game.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader" class="preloader">
+        <div class="preloader-content">
+            <div class="zombie-silhouettes">
+                <div class="zombie-silhouette zombie-1"></div>
+                <div class="zombie-silhouette zombie-2"></div>
+                <div class="zombie-silhouette zombie-3"></div>
+            </div>
+            <div class="loading-text">
+                <span class="loading-char">L</span>
+                <span class="loading-char">O</span>
+                <span class="loading-char">A</span>
+                <span class="loading-char">D</span>
+                <span class="loading-char">I</span>
+                <span class="loading-char">N</span>
+                <span class="loading-char">G</span>
+            </div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fog Overlay -->
+    <div class="fog-overlay">
+        <div class="fog-layer fog-layer-1"></div>
+        <div class="fog-layer fog-layer-2"></div>
+    </div>
+
+    <!-- Background -->
+    <div class="bg-image-layer"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <div class="logo-3d">
+                <span class="logo-icon"><i class="fas fa-skull-crossbones"></i></span>
+                <a href="../index.html" class="logo-text">Z-SURVIVAL</a>
+            </div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../index.html" class="nav-link" data-page="home">
+                <span class="nav-icon"><i class="fas fa-home"></i></span>
+                <span>Home</span>
+            </a></li>
+            <li><a href="game.html" class="nav-link active" data-page="game">
+                <span class="nav-icon"><i class="fas fa-crosshairs"></i></span>
+                <span>Play</span>
+            </a></li>
+            <li><a href="profile.html" class="nav-link" data-page="profile">
+                <span class="nav-icon"><i class="fas fa-user-alt"></i></span>
+                <span>Profile</span>
+            </a></li>
+            <li><a href="about.html" class="nav-link" data-page="about">
+                <span class="nav-icon"><i class="fas fa-info-circle"></i></span>
+                <span>About</span>
+            </a></li>
+        </ul>
+        <div class="nav-auth">
+            <div class="user-info-mini" id="userInfoMini">
+                <span class="user-level">LVL <span id="userLevel">1</span></span>
+                <span class="user-score"><i class="fas fa-trophy"></i> <span id="userScore">0</span></span>
+            </div>
+            <button id="loginBtn" class="btn-auth"><i class="fas fa-sign-in-alt"></i> Login</button>
+            <button id="logoutBtn" class="btn-auth hidden"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </div>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <ul class="mobile-nav-links">
+            <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="game.html"><i class="fas fa-crosshairs"></i> Play Game</a></li>
+            <li><a href="profile.html"><i class="fas fa-user-alt"></i> Profile</a></li>
+            <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+        </ul>
+    </div>
+
+    <!-- Game Page -->
+    <main class="game-page">
+        <div class="game-container">
+            <!-- Game Header -->
+            <div class="game-header">
+                <div class="game-stats">
+                    <div class="stat-box score">
+                        <span class="stat-label">SCORE</span>
+                        <span class="stat-value" id="gameScore">0</span>
+                    </div>
+                    <div class="stat-box level">
+                        <span class="stat-label">LEVEL</span>
+                        <span class="stat-value" id="gameLevel">1</span>
+                    </div>
+                    <div class="stat-box wave">
+                        <span class="stat-label">WAVE</span>
+                        <span class="stat-value" id="gameWave">1</span>
+                    </div>
+                    <div class="stat-box kills">
+                        <span class="stat-label">KILLS</span>
+                        <span class="stat-value" id="gameKills">0</span>
+                    </div>
+                </div>
+                <div class="health-bar-container">
+                    <span class="health-label">HEALTH</span>
+                    <div class="health-bar">
+                        <div class="health-fill" id="healthFill"></div>
+                    </div>
+                    <span class="health-value" id="healthValue">100%</span>
+                </div>
+            </div>
+
+            <!-- Game Area -->
+            <div class="game-area">
+                <div class="game-canvas-container">
+                    <canvas id="gameCanvas"></canvas>
+                    <div class="game-overlay" id="gameOverlay">
+                        <div class="overlay-content">
+                            <h2 class="glitch" data-text="Z-SURVIVAL">Z-SURVIVAL</h2>
+                            <p>Survive the zombie horde</p>
+                            <button class="btn-start" id="btnStart">
+                                <span><i class="fas fa-play"></i> START GAME</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game Controls -->
+                <div class="game-controls">
+                    <div class="control-hint">
+                        <span><i class="fas fa-keyboard"></i> WASD - Move</span>
+                        <span><i class="fas fa-mouse"></i> Click - Shoot</span>
+                    </div>
+                    <div class="weapon-selector">
+                        <button class="weapon-btn active" data-weapon="pistol">
+                            <i class="fas fa-gun"></i>
+                            <span>Pistol</span>
+                        </button>
+                        <button class="weapon-btn" data-weapon="rifle">
+                            <i class="fas fa-crosshairs"></i>
+                            <span>Rifle</span>
+                        </button>
+                        <button class="weapon-btn" data-weapon="shotgun">
+                            <i class="fas fa-bomb"></i>
+                            <span>Shotgun</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Leaderboard -->
+            <div class="leaderboard-panel">
+                <h3><i class="fas fa-trophy"></i> SURVIVOR LEADERBOARD</h3>
+                <div class="leaderboard-list" id="leaderboardList">
+                    <div class="leaderboard-loading">Loading survivors...</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div class="modal-header">
+                <i class="fas fa-user-shield"></i>
+                <h3>SURVIVOR LOGIN</h3>
+            </div>
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="loginEmail">Email Address</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="loginEmail" name="loginEmail" placeholder="survivor@email.com" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="loginPassword" name="loginPassword" placeholder="Enter password" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn-login">
+                    <span><i class="fas fa-sign-in-alt"></i> LOGIN</span>
+                </button>
+            </form>
+            <div class="auth-divider">
+                <span>or continue with</span>
+            </div>
+            <button id="googleAuth" class="btn-google">
+                <i class="fab fa-google"></i>
+                <span>Sign in with Google</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="../assets-config.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js"></script>
+    <script src="../firebase-config.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/game.js"></script>
+</body>
+</html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Z-SURVIVAL</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/about.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader" class="preloader">
+        <div class="preloader-content">
+            <div class="zombie-silhouettes">
+                <div class="zombie-silhouette zombie-1"></div>
+                <div class="zombie-silhouette zombie-2"></div>
+                <div class="zombie-silhouette zombie-3"></div>
+            </div>
+            <div class="loading-text">
+                <span class="loading-char">L</span>
+                <span class="loading-char">O</span>
+                <span class="loading-char">A</span>
+                <span class="loading-char">D</span>
+                <span class="loading-char">I</span>
+                <span class="loading-char">N</span>
+                <span class="loading-char">G</span>
+            </div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fog Overlay -->
+    <div class="fog-overlay">
+        <div class="fog-layer fog-layer-1"></div>
+        <div class="fog-layer fog-layer-2"></div>
+    </div>
+
+    <!-- Background -->
+    <div class="bg-image-layer"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <div class="logo-3d">
+                <span class="logo-icon"><i class="fas fa-skull-crossbones"></i></span>
+                <a href="../index.html" class="logo-text">Z-SURVIVAL</a>
+            </div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../index.html" class="nav-link" data-page="home">
+                <span class="nav-icon"><i class="fas fa-home"></i></span>
+                <span>Home</span>
+            </a></li>
+            <li><a href="game.html" class="nav-link" data-page="game">
+                <span class="nav-icon"><i class="fas fa-crosshairs"></i></span>
+                <span>Play</span>
+            </a></li>
+            <li><a href="profile.html" class="nav-link" data-page="profile">
+                <span class="nav-icon"><i class="fas fa-user-alt"></i></span>
+                <span>Profile</span>
+            </a></li>
+            <li><a href="about.html" class="nav-link active" data-page="about">
+                <span class="nav-icon"><i class="fas fa-info-circle"></i></span>
+                <span>About</span>
+            </a></li>
+        </ul>
+        <div class="nav-auth">
+            <div class="user-info-mini" id="userInfoMini">
+                <span class="user-level">LVL <span id="userLevel">1</span></span>
+                <span class="user-score"><i class="fas fa-trophy"></i> <span id="userScore">0</span></span>
+            </div>
+            <button id="loginBtn" class="btn-auth"><i class="fas fa-sign-in-alt"></i> Login</button>
+            <button id="logoutBtn" class="btn-auth hidden"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </div>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <ul class="mobile-nav-links">
+            <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="game.html"><i class="fas fa-crosshairs"></i> Play Game</a></li>
+            <li><a href="profile.html"><i class="fas fa-user-alt"></i> Profile</a></li>
+            <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+        </ul>
+    </div>
+
+    <!-- About Page -->
+    <main class="about-page">
+        <!-- Hero Section -->
+        <section class="about-hero">
+            <div class="about-hero-content">
+                <h1 class="glitch" data-text="THE APOCALYPSE">THE APOCALYPSE</h1>
+                <p class="hero-tagline">Humanity's last stand begins NOW</p>
+            </div>
+        </section>
+
+        <!-- Story Section -->
+        <section class="story-section">
+            <div class="section-container">
+                <h2 class="section-title">
+                    <span class="title-icon"><i class="fas fa-book-skull"></i></span>
+                    THE STORY
+                    <span class="title-decoration"></span>
+                </h2>
+                <div class="story-content">
+                    <div class="story-text">
+                        <p>It started like any other day. People going to work, children going to school, life continuing as normal. Then came the news reports - a strange virus spreading across the globe. Within days, the world as we knew it had ended.</p>
+                        <p>The infected don't just want to kill you - they want to make you one of them. Every bite, every scratch brings you closer to joining the endless horde. But humanity didn't go down without a fight.</p>
+                        <p>You are a survivor. One of the few who managed to escape the initial outbreak. You've seen friends become enemies, watched cities fall, and learned that the only rule in this new world is <strong>survive or become them</strong>.</p>
+                    </div>
+                    <div class="story-visual">
+                        <div class="visual-frame">
+                            <div class="frame-content">
+                                <i class="fas fa-skull-crossbones"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mission Section -->
+        <section class="mission-section">
+            <div class="section-container">
+                <h2 class="section-title">
+                    <span class="title-icon"><i class="fas fa-clipboard-list"></i></span>
+                    YOUR MISSION
+                    <span class="title-decoration"></span>
+                </h2>
+                <div class="mission-grid">
+                    <div class="mission-objective">
+                        <div class="objective-icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <h3>PRIMARY OBJECTIVE</h3>
+                        <p>Survive endless waves of undead horde. Each wave brings more zombies, faster speeds, and deadlier variants. How long can you last?</p>
+                    </div>
+                    <div class="mission-objective">
+                        <div class="objective-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h3>SECONDARY OBJECTIVE</h3>
+                        <p>Scavenge for supplies, weapons, and resources. Every survivor counts in this fight for humanity's future.</p>
+                    </div>
+                    <div class="mission-objective">
+                        <div class="objective-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>TEAM OBJECTIVE</h3>
+                        <p>Form alliances with other survivors. Coordinate attacks, share resources, and watch each other's backs.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-section">
+            <div class="section-container">
+                <h2 class="section-title">
+                    <span class="title-icon"><i class="fas fa-gamepad"></i></span>
+                    GAME FEATURES
+                    <span class="title-decoration"></span>
+                </h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-crosshairs"></i>
+                        </div>
+                        <h3>INTENSE COMBAT</h3>
+                        <p>Fast-paced action with multiple weapon types, melee attacks, and special abilities.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-skull"></i>
+                        </div>
+                        <h3>ZOMBIE VARIETY</h3>
+                        <p>Different zombie types with unique behaviors - runners, tanks, spitters, and more.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-level-up-alt"></i>
+                        </div>
+                        <h3>PROGRESSION SYSTEM</h3>
+                        <p>Level up, unlock new weapons, earn achievements, and become a legendary survivor.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>MULTIPLAYER MODE</h3>
+                        <p>Team up with friends or compete against other survivors in online battles.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-map"></i>
+                        </div>
+                        <h3>MULTIPLE MAPS</h3>
+                        <p>Explore various environments - cities, hospitals, military bases, and more.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h3>LEADERBOARDS</h3>
+                        <p>Compete for the top spot on global and friend leaderboards.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Weapons Section -->
+        <section class="weapons-section">
+            <div class="section-container">
+                <h2 class="section-title">
+                    <span class="title-icon"><i class="fas fa-gun"></i></span>
+                    WEAPONS
+                    <span class="title-decoration"></span>
+                </h2>
+                <div class="weapons-grid">
+                    <div class="weapon-card">
+                        <div class="weapon-image">
+                            <i class="fas fa-gun"></i>
+                        </div>
+                        <h3>PISTOL</h3>
+                        <p>Reliable sidearm. Good for close encounters.</p>
+                        <span class="weapon-rarity common">COMMON</span>
+                    </div>
+                    <div class="weapon-card">
+                        <div class="weapon-image">
+                            <i class="fas fa-crosshairs"></i>
+                        </div>
+                        <h3>ASSAULT RIFLE</h3>
+                        <p>Automatic fire. Perfect for crowd control.</p>
+                        <span class="weapon-rarity uncommon">UNCOMMON</span>
+                    </div>
+                    <div class="weapon-card">
+                        <div class="weapon-image">
+                            <i class="fas fa-bomb"></i>
+                        </div>
+                        <h3>SHOTGUN</h3>
+                        <p>Devastating up close. One shot, multiple kills.</p>
+                        <span class="weapon-rarity uncommon">UNCOMMON</span>
+                    </div>
+                    <div class="weapon-card">
+                        <div class="weapon-image">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <h3>FLAMETHROWER</h3>
+                        <p>Burn them all. Area damage specialist.</p>
+                        <span class="weapon-rarity rare">RARE</span>
+                    </div>
+                    <div class="weapon-card">
+                        <div class="weapon-image">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3>ELECTRIC CLAW</h3>
+                        <p>Chain lightning. Devastating to groups.</p>
+                        <span class="weapon-rarity epic">EPIC</span>
+                    </div>
+                    <div class="weapon-card">
+                        <div class="weapon-image legendary">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <h3>DOOM BRINGER</h3>
+                        <p>The ultimate weapon. Only the worthy can wield it.</p>
+                        <span class="weapon-rarity legendary">LEGENDARY</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="cta-content">
+                <h2>READY TO SURVIVE?</h2>
+                <p>Join millions of survivors in the fight for humanity's future.</p>
+                <a href="game.html" class="btn-primary btn-play">
+                    <span class="btn-icon"><i class="fas fa-play"></i></span>
+                    <span class="btn-text">PLAY NOW</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div class="modal-header">
+                <i class="fas fa-user-shield"></i>
+                <h3>SURVIVOR LOGIN</h3>
+            </div>
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="loginEmail">Email Address</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="loginEmail" name="loginEmail" placeholder="survivor@email.com" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="loginPassword" name="loginPassword" placeholder="Enter password" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn-login">
+                    <span><i class="fas fa-sign-in-alt"></i> LOGIN</span>
+                </button>
+            </form>
+            <div class="auth-divider">
+                <span>or continue with</span>
+            </div>
+            <button id="googleAuth" class="btn-google">
+                <i class="fab fa-google"></i>
+                <span>Sign in with Google</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="../assets-config.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js"></script>
+    <script src="../firebase-config.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>
