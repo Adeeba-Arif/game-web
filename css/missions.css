@@ -1,0 +1,225 @@
+/* ========================================
+   MISSIONS PAGE STYLES
+   ======================================== */
+.missions-page {
+    min-height: calc(100vh - 150px);
+    padding: 100px 20px 50px;
+}
+
+.missions-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.missions-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.missions-header h1 {
+    font-family: 'Black Ops One', cursive;
+    font-size: 2.5rem;
+    color: #e63946;
+    text-shadow: 0 0 20px rgba(230, 57, 70, 0.5);
+    margin-bottom: 15px;
+    letter-spacing: 3px;
+}
+
+.missions-header h1 i {
+    margin-right: 15px;
+}
+
+.missions-header p {
+    color: #ccc;
+    font-size: 1.1rem;
+}
+
+.missions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+}
+
+.mission-card {
+    background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+    border: 2px solid rgba(230, 57, 70, 0.3);
+    border-radius: 12px;
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.mission-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #e63946, #ff6b6b);
+}
+
+.mission-card:hover {
+    transform: translateY(-5px);
+    border-color: #e63946;
+    box-shadow: 0 10px 40px rgba(230, 57, 70, 0.3);
+}
+
+.mission-card[data-mission="1"]::before,
+.mission-card[data-mission="2"]::before {
+    background: linear-gradient(90deg, #39ff14, #00ff00);
+}
+
+.mission-card[data-mission="3"]::before,
+.mission-card[data-mission="4"]::before {
+    background: linear-gradient(90deg, #ffa500, #ff6600);
+}
+
+.mission-card[data-mission="5"]::before {
+    background: linear-gradient(90deg, #ff3838, #cc0000);
+}
+
+.mission-card[data-mission="6"]::before {
+    background: linear-gradient(90deg, #ff00ff, #9900cc);
+}
+
+.mission-number {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-family: 'Black Ops One', cursive;
+    font-size: 3rem;
+    color: rgba(255, 255, 255, 0.1);
+    line-height: 1;
+}
+
+.mission-card .mission-icon {
+    width: 70px;
+    height: 70px;
+    background: rgba(230, 57, 70, 0.1);
+    border: 2px solid #e63946;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.mission-card .mission-icon i {
+    font-size: 1.8rem;
+    color: #e63946;
+}
+
+.mission-card h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.3rem;
+    color: #fff;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.mission-card > p {
+    color: #ccc;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+.mission-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mission-difficulty {
+    padding: 5px 12px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    border-radius: 3px;
+}
+
+.mission-difficulty.easy {
+    background: rgba(57, 255, 20, 0.2);
+    color: #39ff14;
+    border: 1px solid #39ff14;
+}
+
+.mission-difficulty.medium {
+    background: rgba(255, 165, 0, 0.2);
+    color: #ffa500;
+    border: 1px solid #ffa500;
+}
+
+.mission-difficulty.hard {
+    background: rgba(230, 57, 70, 0.2);
+    color: #e63946;
+    border: 1px solid #e63946;
+}
+
+.mission-difficulty.extreme {
+    background: rgba(255, 0, 255, 0.2);
+    color: #ff00ff;
+    border: 1px solid #ff00ff;
+}
+
+.mission-reward {
+    color: #ffd700;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+}
+
+.mission-reward i {
+    margin-right: 5px;
+}
+
+.btn-mission-start {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #e63946, #ff6b6b);
+    border: 2px solid #e63946;
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+    text-transform: uppercase;
+}
+
+.btn-mission-start:hover {
+    transform: scale(1.02);
+    box-shadow: 0 5px 20px rgba(230, 57, 70, 0.4);
+}
+
+.btn-mission-start.locked {
+    background: #2a2a3e;
+    border-color: #444;
+    color: #666;
+    cursor: not-allowed;
+}
+
+.btn-mission-start.locked:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .missions-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .missions-header h1 {
+        font-size: 1.8rem;
+    }
+}

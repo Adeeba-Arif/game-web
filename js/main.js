@@ -478,6 +478,7 @@ async function handleLogin(e) {
     e.preventDefault();
     
     const email = document.getElementById('loginEmail').value;
+    const whatsapp = document.getElementById('loginWhatsapp') ? document.getElementById('loginWhatsapp').value : '';
     const password = document.getElementById('loginPassword').value;
     
     if (DEMO_MODE) {
@@ -494,7 +495,19 @@ async function handleLogin(e) {
     try {
         showToast('Logging in...', 'info');
         
-        await auth.signInWithEmailAndPassword(email, password);
+        const userCredential = await auth.signInWithEmailAndPassword(email, password);
+        const user = userCredential.user;
+        
+        // Fetch user data from Firestore
+        if (db) {
+            const userDoc = await db.collection('users').doc(user.uid).get();
+            if (userDoc.exists) {
+                const userData = userDoc.data();
+                localStorage.setItem('userWhatsapp', userData.whatsapp || '');
+            }
+        }
+        
+        localStorage.setItem('userEmail', email);
         
         closeModal(elements.loginModal);
         elements.loginForm.reset();
@@ -510,8 +523,22 @@ async function handleRegister(e) {
     e.preventDefault();
     
     const email = document.getElementById('regEmail').value;
+    const whatsapp = document.getElementById('regWhatsapp').value;
     const password = document.getElementById('regPassword').value;
     const confirmPassword = document.getElementById('regConfirmPassword').value;
+    
+    // Validate WhatsApp number
+    if (!whatsapp || whatsapp.trim() === '') {
+        showToast('Please enter your WhatsApp number!', 'error');
+        return;
+    }
+    
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        showToast('Please enter a valid email address!', 'error');
+        return;
+    }
     
     // Validate passwords
     if (password !== confirmPassword) {
@@ -526,7 +553,7 @@ async function handleRegister(e) {
     
     if (DEMO_MODE) {
         // Demo mode - simulate registration
-        handleDemoRegister(email);
+        handleDemoRegister(email, whatsapp);
         return;
     }
     
@@ -544,18 +571,24 @@ async function handleRegister(e) {
         if (db) {
             await db.collection('users').doc(userCredential.user.uid).set({
                 email: email,
+                whatsapp: whatsapp,
                 score: 0,
                 level: 1,
                 kills: 0,
                 playTime: 0,
+                paymentStatus: 'pending',
                 createdAt: new Date().toISOString()
             });
         }
         
+        // Send email notification (simulated - in production use a backend service)
+        await sendRegistrationEmail(email, whatsapp);
+        
+        // Show payment instructions
+        showPaymentInstructions(email, whatsapp);
+        
         closeModal(elements.registerModal);
         elements.registerForm.reset();
-        
-        showToast('Account created successfully!', 'success');
     } catch (error) {
         console.error('Registration error:', error);
         showToast(getAuthErrorMessage(error.code), 'error');
@@ -637,7 +670,7 @@ function handleDemoLogin(email) {
     showToast('Demo login successful!', 'success');
 }
 
-function handleDemoRegister(email) {
+function handleDemoRegister(email, whatsapp) {
     currentUser = { uid: 'demo-user-' + Date.now(), email: email };
     
     elements.loginBtn.classList.add('hidden');
@@ -657,7 +690,14 @@ function handleDemoRegister(email) {
     closeModal(elements.registerModal);
     if (elements.registerForm) elements.registerForm.reset();
     
-    showToast('Demo account created!', 'success');
+    // Send notification (simulated)
+    console.log('=== DEMO EMAIL NOTIFICATION ===');
+    console.log('To: thedarkworld.8304@gmail.com');
+    console.log(`New player: ${email}, WhatsApp: ${whatsapp}`);
+    showToast('Admin notified of your registration!', 'success');
+    
+    // Show payment instructions
+    showPaymentInstructions(email, whatsapp || 'Not provided');
 }
 
 // ========================================
@@ -809,6 +849,111 @@ function getAuthErrorMessage(errorCode) {
     };
     
     return messages[errorCode] || 'An error occurred. Please try again.';
+}
+
+// ========================================
+// EMAIL NOTIFICATION & PAYMENT
+// ========================================
+async function sendRegistrationEmail(email, whatsapp) {
+    // In production, this would use a backend service like EmailJS, SendGrid, or Firebase Functions
+    // For now, we'll simulate the email sending and log it
+    
+    console.log('=== EMAIL NOTIFICATION ===');
+    console.log('To: thedarkworld.8304@gmail.com');
+    console.log('Subject: New Player Registration - The Dark World');
+    console.log('Body:');
+    console.log('===========================');
+    console.log('A new player has registered!');
+    console.log(`Player Email: ${email}`);
+    console.log(`WhatsApp Number: ${whatsapp}`);
+    console.log(`Registration Time: ${new Date().toISOString()}`);
+    console.log('===========================');
+    
+    // Simulate API call delay
+    await new Promise(resolve => setTimeout(resolve, 500));
+    
+    showToast('Admin notified of your registration!', 'success');
+}
+
+function showPaymentInstructions(email, whatsapp) {
+    // Create payment instruction modal if it doesn't exist
+    let paymentModal = document.getElementById('paymentModal');
+    
+    if (!paymentModal) {
+        const modalHTML = `
+            <div id="paymentModal" class="modal">
+                <div class="modal-content payment-modal">
+                    <div class="payment-header">
+                        <i class="fas fa-credit-card"></i>
+                        <h3>PAYMENT REQUIRED</h3>
+                    </div>
+                    <div class="payment-body">
+                        <div class="payment-amount">
+                            <span class="amount-label">Registration Fee</span>
+                            <span class="amount-value">500 PKR</span>
+                        </div>
+                        <div class="payment-instructions">
+                            <h4><i class="fas fa-info-circle"></i> Payment Instructions</h4>
+                            <ol>
+                                <li>Submit payment of <strong>500 PKR</strong></li>
+                                <li>Take a screenshot of your payment receipt</li>
+                                <li>Send the screenshot to our WhatsApp number</li>
+                            </ol>
+                        </div>
+                        <div class="payment-whatsapp">
+                            <h4><i class="fab fa-whatsapp"></i> Send Payment Screenshot</h4>
+                            <a href="https://wa.me/923400000000" target="_blank" class="btn-whatsapp">
+                                <i class="fab fa-whatsapp"></i>
+                                <span>Click to Send on WhatsApp</span>
+                            </a>
+                            <p class="whatsapp-note">Click the button above to send your payment screenshot</p>
+                        </div>
+                        <div class="payment-user-info">
+                            <p><strong>Your Registration Details:</strong></p>
+                            <p><i class="fas fa-envelope"></i> Email: <span id="paymentEmail"></span></p>
+                            <p><i class="fab fa-whatsapp"></i> WhatsApp: <span id="paymentWhatsapp"></span></p>
+                        </div>
+                    </div>
+                    <div class="payment-footer">
+                        <button class="btn-payment-confirm" id="confirmPayment">
+                            <i class="fas fa-check"></i> I've Sent Payment
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        document.body.insertAdjacentHTML('beforeend', modalHTML);
+        paymentModal = document.getElementById('paymentModal');
+        
+        // Add close handler
+        const closeBtn = paymentModal.querySelector('.modal-close');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => closeModal(paymentModal));
+        }
+        
+        paymentModal.addEventListener('click', (e) => {
+            if (e.target === paymentModal) {
+                closeModal(paymentModal);
+            }
+        });
+        
+        // Confirm payment button
+        const confirmBtn = document.getElementById('confirmPayment');
+        if (confirmBtn) {
+            confirmBtn.addEventListener('click', () => {
+                closeModal(paymentModal);
+                showToast('Payment confirmation sent! We will verify shortly.', 'success');
+            });
+        }
+    }
+    
+    // Update user info in modal
+    document.getElementById('paymentEmail').textContent = email;
+    document.getElementById('paymentWhatsapp').textContent = whatsapp;
+    
+    // Show the modal
+    paymentModal.classList.add('active');
 }
 
 // ========================================

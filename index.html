@@ -69,13 +69,9 @@
                 <span class="nav-icon"><i class="fas fa-home"></i></span>
                 <span>Home</span>
             </a></li>
-            <li><a href="pages/game.html" class="nav-link" data-page="game">
-                <span class="nav-icon"><i class="fas fa-crosshairs"></i></span>
-                <span>Play</span>
-            </a></li>
-            <li><a href="pages/profile.html" class="nav-link" data-page="profile">
-                <span class="nav-icon"><i class="fas fa-user-alt"></i></span>
-                <span>Profile</span>
+            <li><a href="pages/missions.html" class="nav-link" data-page="missions">
+                <span class="nav-icon"><i class="fas fa-tasks"></i></span>
+                <span>Missions</span>
             </a></li>
             <li><a href="pages/about.html" class="nav-link" data-page="about">
                 <span class="nav-icon"><i class="fas fa-info-circle"></i></span>
@@ -84,7 +80,6 @@
         </ul>
         <div class="nav-auth">
             <div class="user-info-mini" id="userInfoMini">
-                <span class="user-level">LVL <span id="userLevel">1</span></span>
                 <span class="user-score"><i class="fas fa-trophy"></i> <span id="userScore">0</span></span>
             </div>
             <button id="loginBtn" class="btn-auth"><i class="fas fa-sign-in-alt"></i> Login</button>
@@ -101,8 +96,7 @@
     <div class="mobile-menu">
         <ul class="mobile-nav-links">
             <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
-            <li><a href="pages/game.html"><i class="fas fa-crosshairs"></i> Play Game</a></li>
-            <li><a href="pages/profile.html"><i class="fas fa-user-alt"></i> Profile</a></li>
+            <li><a href="pages/missions.html"><i class="fas fa-tasks"></i> Missions</a></li>
             <li><a href="pages/about.html"><i class="fas fa-info-circle"></i> About</a></li>
         </ul>
     </div>
@@ -125,12 +119,12 @@
                         <p class="hero-subtitle">The world has fallen. Humanity's last stand begins NOW. Join the resistance and fight for survival in the ultimate zombie apocalypse experience.</p>
                         <div class="hero-buttons">
                             <a href="pages/game.html" class="btn-primary btn-play">
-                                <span class="btn-icon"><i class="fas fa-play"></i></span>
-                                <span class="btn-text">PLAY NOW</span>
+                                <span class="btn-icon"><i class="fas fa-credit-card"></i></span>
+                                <span class="btn-text">SUBMIT 500 PKR TO JOIN</span>
                                 <span class="btn-glow"></span>
                             </a>
                             <a href="pages/about.html" class="btn-secondary">
-                                <span class="btn-text">MISSION BRIEF</span>
+                                <span class="btn-text">LEARN MORE</span>
                                 <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
                             </a>
                         </div>
@@ -216,11 +210,23 @@
                                 <span class="mission-reward"><i class="fas fa-coins"></i> 100 XP</span>
                             </div>
                             <div class="mission-icon">
-                                <i class="fas fa-map-marker-alt"></i>
+                                <i class="fas fa-home"></i>
                             </div>
-                            <h3>Safe House</h3>
-                            <p>Locate the nearest safe house and secure it from zombie intrusion.</p>
-                            <button class="btn-mission">ACCEPT MISSION</button>
+                            <h3>The Village Outskirts</h3>
+                            <p>Begin your journey at the edge of the abandoned village.</p>
+                            <a href="pages/missions.html" class="btn-mission">VIEW MISSION</a>
+                        </div>
+                        <div class="mission-card">
+                            <div class="mission-header">
+                                <span class="mission-difficulty easy">EASY</span>
+                                <span class="mission-reward"><i class="fas fa-coins"></i> 150 XP</span>
+                            </div>
+                            <div class="mission-icon">
+                                <i class="fas fa-tree"></i>
+                            </div>
+                            <h3>The Whispering Woods</h3>
+                            <p>Venture into the dark forest where survivors have gone missing.</p>
+                            <a href="pages/missions.html" class="btn-mission">VIEW MISSION</a>
                         </div>
                         <div class="mission-card">
                             <div class="mission-header">
@@ -228,11 +234,23 @@
                                 <span class="mission-reward"><i class="fas fa-coins"></i> 250 XP</span>
                             </div>
                             <div class="mission-icon">
-                                <i class="fas fa-bomb"></i>
+                                <i class="fas fa-home"></i>
                             </div>
-                            <h3>Supply Drop</h3>
-                            <p>Retrieve the supply drop before the horde arrives. Speed is essential.</p>
-                            <button class="btn-mission">ACCEPT MISSION</button>
+                            <h3>The Forgotten Hamlet</h3>
+                            <p>Discover the ruins of a small hamlet overrun by the infected.</p>
+                            <a href="pages/missions.html" class="btn-mission">VIEW MISSION</a>
+                        </div>
+                        <div class="mission-card">
+                            <div class="mission-header">
+                                <span class="mission-difficulty medium">MEDIUM</span>
+                                <span class="mission-reward"><i class="fas fa-coins"></i> 350 XP</span>
+                            </div>
+                            <div class="mission-icon">
+                                <i class="fas fa-arrow-down"></i>
+                            </div>
+                            <h3>The Depths Below</h3>
+                            <p>Descend into the underground tunnels beneath the city.</p>
+                            <a href="pages/missions.html" class="btn-mission">VIEW MISSION</a>
                         </div>
                         <div class="mission-card">
                             <div class="mission-header">
@@ -240,11 +258,23 @@
                                 <span class="mission-reward"><i class="fas fa-coins"></i> 500 XP</span>
                             </div>
                             <div class="mission-icon">
-                                <i class="fas fa-skull"></i>
+                                <i class="fas fa-castle"></i>
                             </div>
-                            <h3>Horde Boss</h3>
-                            <p>Defeat the Horde Leader and earn legendary rewards. Requires team of 4+.</p>
-                            <button class="btn-mission">ACCEPT MISSION</button>
+                            <h3>The Ruined Castle</h3>
+                            <p>Storm the ancient castle that has become a fortress for the undead.</p>
+                            <a href="pages/missions.html" class="btn-mission">VIEW MISSION</a>
+                        </div>
+                        <div class="mission-card">
+                            <div class="mission-header">
+                                <span class="mission-difficulty hard">EXTREME</span>
+                                <span class="mission-reward"><i class="fas fa-crown"></i> 1000 XP</span>
+                            </div>
+                            <div class="mission-icon">
+                                <i class="fas fa-dungeon"></i>
+                            </div>
+                            <h3>The Final Sanctum</h3>
+                            <p>The last stand against the zombie apocalypse.</p>
+                            <a href="pages/missions.html" class="btn-mission">VIEW MISSION</a>
                         </div>
                     </div>
                 </div>
@@ -315,7 +345,7 @@
                 </div>
                 <div class="footer-contact">
                     <h4><i class="fas fa-headset"></i> Support</h4>
-                    <p><i class="fas fa-envelope"></i> survive@zsurvival.com</p>
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:thedarkworld.8304@gmail.com">thedarkworld.8304@gmail.com</a></p>
                     <p><i class="fab fa-discord"></i> Join Discord</p>
                 </div>
                 <div class="footer-social">
@@ -350,6 +380,13 @@
                     <div class="input-wrapper">
                         <i class="fas fa-envelope"></i>
                         <input type="email" id="loginEmail" name="loginEmail" placeholder="survivor@email.com" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="loginWhatsapp">WhatsApp Number</label>
+                    <div class="input-wrapper">
+                        <i class="fab fa-whatsapp"></i>
+                        <input type="tel" id="loginWhatsapp" name="loginWhatsapp" placeholder="+1 234 567 8900">
                     </div>
                 </div>
                 <div class="form-group">
@@ -457,8 +494,8 @@
             </div>
         </div>
         <div class="dashboard-actions">
-            <a href="pages/game.html" class="dashboard-btn">
-                <i class="fas fa-play"></i> Play Now
+            <a href="pages/missions.html" class="dashboard-btn">
+                <i class="fas fa-tasks"></i> Missions
             </a>
             <a href="pages/profile.html" class="dashboard-btn">
                 <i class="fas fa-user"></i> Profile

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Missions - The Dark World</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/profile.css">
+    <link rel="stylesheet" href="../css/missions.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader" class="preloader">
+        <div class="preloader-content">
+            <div class="zombie-silhouettes">
+                <div class="zombie-silhouette zombie-1"></div>
+                <div class="zombie-silhouette zombie-2"></div>
+                <div class="zombie-silhouette zombie-3"></div>
+            </div>
+            <div class="loading-text">
+                <span class="loading-char">L</span>
+                <span class="loading-char">O</span>
+                <span class="loading-char">A</span>
+                <span class="loading-char">D</span>
+                <span class="loading-char">I</span>
+                <span class="loading-char">N</span>
+                <span class="loading-char">G</span>
+            </div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fog Overlay -->
+    <div class="fog-overlay">
+        <div class="fog-layer fog-layer-1"></div>
+        <div class="fog-layer fog-layer-2"></div>
+    </div>
+
+    <!-- Background -->
+    <div class="bg-image-layer"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <div class="logo-3d">
+                <span class="logo-icon"><i class="fas fa-skull-crossbones"></i></span>
+                <a href="../index.html" class="logo-text">The Dark World</a>
+            </div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../index.html" class="nav-link" data-page="home">
+                <span class="nav-icon"><i class="fas fa-home"></i></span>
+                <span>Home</span>
+            </a></li>
+            <li><a href="game.html" class="nav-link" data-page="game">
+                <span class="nav-icon"><i class="fas fa-crosshairs"></i></span>
+                <span>Play</span>
+            </a></li>
+            <li><a href="profile.html" class="nav-link" data-page="profile">
+                <span class="nav-icon"><i class="fas fa-user-alt"></i></span>
+                <span>Profile</span>
+            </a></li>
+            <li><a href="missions.html" class="nav-link active" data-page="missions">
+                <span class="nav-icon"><i class="fas fa-tasks"></i></span>
+                <span>Missions</span>
+            </a></li>
+            <li><a href="about.html" class="nav-link" data-page="about">
+                <span class="nav-icon"><i class="fas fa-info-circle"></i></span>
+                <span>About</span>
+            </a></li>
+        </ul>
+        <div class="nav-auth">
+            <div class="user-info-mini" id="userInfoMini">
+                <span class="user-level">LVL <span id="userLevel">1</span></span>
+                <span class="user-score"><i class="fas fa-trophy"></i> <span id="userScore">0</span></span>
+            </div>
+            <button id="loginBtn" class="btn-auth"><i class="fas fa-sign-in-alt"></i> Login</button>
+            <button id="logoutBtn" class="btn-auth hidden"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </div>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <ul class="mobile-nav-links">
+            <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="game.html"><i class="fas fa-crosshairs"></i> Play</a></li>
+            <li><a href="profile.html"><i class="fas fa-user-alt"></i> Profile</a></li>
+            <li><a href="missions.html"><i class="fas fa-tasks"></i> Missions</a></li>
+            <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+        </ul>
+    </div>
+
+    <!-- Missions Page -->
+    <main class="missions-page">
+        <div class="missions-container">
+            <div class="missions-header">
+                <h1><i class="fas fa-tasks"></i> SURVIVAL MISSIONS</h1>
+                <p>Complete missions to earn rewards and progress through the game</p>
+            </div>
+            
+            <div class="missions-grid">
+                <!-- Mission I -->
+                <div class="mission-card" data-mission="1">
+                    <div class="mission-number">I</div>
+                    <div class="mission-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>The Village Outskirts</h3>
+                    <p>Begin your journey at the edge of the abandoned village. Clear out the initial wave of walkers and secure the perimeter.</p>
+                    <div class="mission-meta">
+                        <span class="mission-difficulty easy">EASY</span>
+                        <span class="mission-reward"><i class="fas fa-coins"></i> 100 XP</span>
+                    </div>
+                    <button class="btn-mission-start" data-mission="1">
+                        <i class="fas fa-play"></i> START MISSION
+                    </button>
+                </div>
+
+                <!-- Mission II -->
+                <div class="mission-card" data-mission="2">
+                    <div class="mission-number">II</div>
+                    <div class="mission-icon">
+                        <i class="fas fa-tree"></i>
+                    </div>
+                    <h3>The Whispering Woods</h3>
+                    <p>Venture into the dark forest where survivors have gone missing. Navigate through the trees and eliminate the horde.</p>
+                    <div class="mission-meta">
+                        <span class="mission-difficulty easy">EASY</span>
+                        <span class="mission-reward"><i class="fas fa-coins"></i> 150 XP</span>
+                    </div>
+                    <button class="btn-mission-start" data-mission="2">
+                        <i class="fas fa-lock"></i> LOCKED
+                    </button>
+                </div>
+
+                <!-- Mission III -->
+                <div class="mission-card" data-mission="3">
+                    <div class="mission-number">III</div>
+                    <div class="mission-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>The Forgotten Hamlet</h3>
+                    <p>Discover the ruins of a small hamlet overrun by the infected. Search for supplies and survivors.</p>
+                    <div class="mission-meta">
+                        <span class="mission-difficulty medium">MEDIUM</span>
+                        <span class="mission-reward"><i class="fas fa-coins"></i> 250 XP</span>
+                    </div>
+                    <button class="btn-mission-start" data-mission="3">
+                        <i class="fas fa-lock"></i> LOCKED
+                    </button>
+                </div>
+
+                <!-- Mission IV -->
+                <div class="mission-card" data-mission="4">
+                    <div class="mission-number">IV</div>
+                    <div class="mission-icon">
+                        <i class="fas fa-arrow-down"></i>
+                    </div>
+                    <h3>The Depths Below</h3>
+                    <p>Descend into the underground tunnels beneath the city. Face the most dangerous mutants in the darkness.</p>
+                    <div class="mission-meta">
+                        <span class="mission-difficulty medium">MEDIUM</span>
+                        <span class="mission-reward"><i class="fas fa-coins"></i> 350 XP</span>
+                    </div>
+                    <button class="btn-mission-start" data-mission="4">
+                        <i class="fas fa-lock"></i> LOCKED
+                    </button>
+                </div>
+
+                <!-- Mission V -->
+                <div class="mission-card" data-mission="5">
+                    <div class="mission-number">V</div>
+                    <div class="mission-icon">
+                        <i class="fas fa-castle"></i>
+                    </div>
+                    <h3>The Ruined Castle</h3>
+                    <p>Storm the ancient castle that has become a fortress for the undead. Battle through waves of elite infected.</p>
+                    <div class="mission-meta">
+                        <span class="mission-difficulty hard">HARD</span>
+                        <span class="mission-reward"><i class="fas fa-coins"></i> 500 XP</span>
+                    </div>
+                    <button class="btn-mission-start" data-mission="5">
+                        <i class="fas fa-lock"></i> LOCKED
+                    </button>
+                </div>
+
+                <!-- Mission VI -->
+                <div class="mission-card" data-mission="6">
+                    <div class="mission-number">VI</div>
+                    <div class="mission-icon">
+                        <i class="fas fa-dungeon"></i>
+                    </div>
+                    <h3>The Final Sanctum</h3>
+                    <p>The last stand against the zombie apocalypse. Face the horde master and end this nightmare once and for all.</p>
+                    <div class="mission-meta">
+                        <span class="mission-difficulty extreme">EXTREME</span>
+                        <span class="mission-reward"><i class="fas fa-crown"></i> 1000 XP</span>
+                    </div>
+                    <button class="btn-mission-start" data-mission="6">
+                        <i class="fas fa-lock"></i> LOCKED
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div class="modal-header">
+                <i class="fas fa-user-shield"></i>
+                <h3>SURVIVOR LOGIN</h3>
+            </div>
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="loginEmail">Email Address</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="loginEmail" name="loginEmail" placeholder="survivor@email.com" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="loginWhatsapp">WhatsApp Number</label>
+                    <div class="input-wrapper">
+                        <i class="fab fa-whatsapp"></i>
+                        <input type="tel" id="loginWhatsapp" name="loginWhatsapp" placeholder="+1 234 567 8900">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="loginPassword" name="loginPassword" placeholder="Enter password" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn-login">
+                    <span><i class="fas fa-sign-in-alt"></i> LOGIN</span>
+                </button>
+            </form>
+            <div class="auth-divider">
+                <span>or continue with</span>
+            </div>
+            <button id="googleAuth" class="btn-google">
+                <i class="fab fa-google"></i>
+                <span>Sign in with Google</span>
+            </button>
+            <div class="auth-divider">
+                <span>new survivor?</span>
+            </div>
+            <button id="showRegister" class="btn-register-switch">
+                <span><i class="fas fa-user-plus"></i> CREATE ACCOUNT</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close register-close">&times;</span>
+            <div class="modal-header">
+                <i class="fas fa-user-plus"></i>
+                <h3>JOIN THE RESISTANCE</h3>
+            </div>
+            <form id="registerForm" class="register-form">
+                <div class="form-group">
+                    <label for="regEmail">Email Address</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="regEmail" name="regEmail" placeholder="survivor@email.com" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="regWhatsapp">WhatsApp Number</label>
+                    <div class="input-wrapper">
+                        <i class="fab fa-whatsapp"></i>
+                        <input type="tel" id="regWhatsapp" name="regWhatsapp" placeholder="+1 234 567 8900" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">Password</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="regPassword" name="regPassword" placeholder="Create password" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="regConfirmPassword">Confirm Password</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="regConfirmPassword" name="regConfirmPassword" placeholder="Confirm password" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn-register">
+                    <span><i class="fas fa-user-plus"></i> REGISTER</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="../assets-config.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js"></script>
+    <script src="../firebase-config.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        // Mission functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mission start buttons
+            document.querySelectorAll('.btn-mission-start').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const missionId = this.getAttribute('data-mission');
+                    
+                    if (this.classList.contains('locked')) {
+                        // Show message that mission is locked
+                        if (typeof showToast === 'function') {
+                            showToast('Complete previous missions to unlock this!', 'error');
+                        }
+                        return;
+                    }
+                    
+                    // Redirect to game with mission parameter
+                    window.location.href = 'game.html?mission=' + missionId;
+                });
+            });
+        });
+    </script>
+</body>
+</html>

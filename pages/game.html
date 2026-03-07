@@ -128,16 +128,19 @@
             </div>
 
             <!-- Game Area -->
-            <div class="game-area">
+            <div class="game-area" id="gameArea">
                 <div class="game-canvas-container">
                     <canvas id="gameCanvas"></canvas>
                     <div class="game-overlay" id="gameOverlay">
                         <div class="overlay-content">
                             <h2 class="glitch" data-text="The Dark World">The Dark World</h2>
-                            <p>Survive the zombie horde</p>
-                            <button class="btn-start" id="btnStart">
-                                <span><i class="fas fa-play"></i> START GAME</span>
-                            </button>
+                            <p>Join the resistance and survive the zombie horde</p>
+                            <div class="join-game-section">
+                                <button class="btn-join-game" id="btnJoinGame">
+                                    <span><i class="fas fa-credit-card"></i> SUBMIT 500 PKR TO JOIN</span>
+                                </button>
+                                <p class="join-note">Register to get access to the game</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -189,6 +192,13 @@
                     <div class="input-wrapper">
                         <i class="fas fa-envelope"></i>
                         <input type="email" id="loginEmail" name="loginEmail" placeholder="survivor@email.com" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="loginWhatsapp">WhatsApp Number</label>
+                    <div class="input-wrapper">
+                        <i class="fab fa-whatsapp"></i>
+                        <input type="tel" id="loginWhatsapp" name="loginWhatsapp" placeholder="+1 234 567 8900">
                     </div>
                 </div>
                 <div class="form-group">

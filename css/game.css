@@ -173,6 +173,167 @@
     pointer-events: none;
 }
 
+/* Mission Brief Overlay */
+.mission-brief-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(10, 10, 20, 0.98) 0%, rgba(20, 20, 40, 0.98) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    transition: opacity 0.5s ease;
+    padding: 20px;
+}
+
+.mission-brief-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.mission-brief-content {
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+}
+
+.mission-brief-content h2 {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    color: var(--primary-red);
+    text-shadow: var(--shadow-red);
+    margin-bottom: 30px;
+    letter-spacing: 3px;
+}
+
+.mission-brief-content h2 i {
+    margin-right: 15px;
+}
+
+.mission-details {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(230, 57, 70, 0.3);
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.mission-objective {
+    margin-bottom: 20px;
+}
+
+.mission-objective:last-of-type {
+    margin-bottom: 0;
+}
+
+.mission-objective h3 {
+    color: var(--text-white);
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.mission-objective h3 i {
+    color: var(--primary-red);
+    margin-right: 8px;
+}
+
+.mission-objective p {
+    color: var(--text-light);
+    line-height: 1.6;
+    margin-left: 24px;
+}
+
+.mission-tips {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mission-tips h3 {
+    color: var(--accent-gold);
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.mission-tips h3 i {
+    margin-right: 8px;
+}
+
+.mission-tips ul {
+    list-style: none;
+    padding: 0;
+    margin-left: 24px;
+}
+
+.mission-tips li {
+    color: var(--text-light);
+    margin-bottom: 8px;
+    position: relative;
+    padding-left: 20px;
+}
+
+.mission-tips li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--accent-gold);
+}
+
+/* Mission Brief Header Button */
+.btn-mission-brief {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, rgba(230, 57, 70, 0.2), rgba(230, 57, 70, 0.1));
+    border: 1px solid var(--primary-red);
+    color: var(--text-white);
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+    text-transform: uppercase;
+}
+
+.btn-mission-brief:hover {
+    background: var(--primary-red);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(230, 57, 70, 0.4);
+}
+
+.btn-mission-brief i {
+    font-size: 1rem;
+}
+
+/* Responsive Mission Brief */
+@media (max-width: 768px) {
+    .mission-brief-content h2 {
+        font-size: 1.8rem;
+    }
+    
+    .mission-details {
+        padding: 15px;
+    }
+    
+    .btn-mission-brief span {
+        display: none;
+    }
+    
+    .btn-mission-brief {
+        padding: 10px 15px;
+    }
+}
+
 .overlay-content {
     text-align: center;
 }
@@ -210,6 +371,43 @@
 .btn-start:hover {
     transform: scale(1.05);
     box-shadow: var(--shadow-red);
+}
+
+/* Join Game Section */
+.join-game-section {
+    text-align: center;
+}
+
+.btn-join-game {
+    padding: 20px 50px;
+    background: linear-gradient(135deg, #ff6b35, #f7931e);
+    border: 2px solid #ff6b35;
+    color: #fff;
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    text-transform: uppercase;
+    box-shadow: 0 5px 20px rgba(255, 107, 53, 0.4);
+}
+
+.btn-join-game:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 30px rgba(255, 107, 53, 0.6);
+    background: linear-gradient(135deg, #f7931e, #ff6b35);
+}
+
+.btn-join-game i {
+    margin-right: 10px;
+}
+
+.join-note {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-top: 15px;
 }
 
 /* Game Controls */

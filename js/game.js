@@ -97,10 +97,62 @@ function setupEventListeners() {
         }
     });
     
-    // Start button
-    const startBtn = document.getElementById('btnStart');
-    if (startBtn) {
-        startBtn.addEventListener('click', startGame);
+    // Join Game button - shows payment/registration
+    const joinBtn = document.getElementById('btnJoinGame');
+    if (joinBtn) {
+        joinBtn.addEventListener('click', async () => {
+            // Check if user is logged in via Firebase
+            let isLoggedIn = false;
+            let userEmail = '';
+            let userWhatsapp = '';
+            
+            if (typeof auth !== 'undefined' && auth.currentUser) {
+                isLoggedIn = true;
+                const user = auth.currentUser;
+                userEmail = user.email;
+                
+                // Fetch user data from Firestore
+                if (typeof db !== 'undefined') {
+                    try {
+                        const userDoc = await db.collection('users').doc(user.uid).get();
+                        if (userDoc.exists) {
+                            const userData = userDoc.data();
+                            userWhatsapp = userData.whatsapp || '';
+                        }
+                    } catch (e) {
+                        console.log('Could not fetch user data:', e);
+                    }
+                }
+            }
+            
+            if (!isLoggedIn) {
+                // Show registration modal
+                if (typeof showToast === 'function') {
+                    showToast('Please register first to join the game!', 'info');
+                }
+                // Trigger registration modal from parent page
+                const registerModal = document.getElementById('registerModal');
+                if (registerModal) {
+                    registerModal.classList.add('active');
+                } else {
+                    // Try to find and click register button
+                    const showRegister = document.getElementById('showRegister');
+                    if (showRegister) {
+                        showRegister.click();
+                    }
+                }
+                return;
+            }
+            
+            // Show payment instructions for logged in users
+            if (typeof showPaymentInstructions === 'function') {
+                showPaymentInstructions(userEmail, userWhatsapp);
+            }
+            
+            if (typeof showToast === 'function') {
+                showToast('Please complete payment to play!', 'info');
+            }
+        });
     }
     
     // Weapon buttons
@@ -111,6 +163,76 @@ function setupEventListeners() {
             player.weapon = btn.dataset.weapon;
         });
     });
+    
+    // Mission Brief button
+    const btnMissionBrief = document.getElementById('btnMissionBrief');
+    const missionBriefOverlay = document.getElementById('missionBriefOverlay');
+    const gameOverlay = document.getElementById('gameOverlay');
+    const btnPlayGame = document.getElementById('btnPlayGame');
+    
+    if (btnMissionBrief && missionBriefOverlay) {
+        btnMissionBrief.addEventListener('click', () => {
+            // Pause/stop the game if running
+            if (gameRunning) {
+                gameRunning = false;
+            }
+            
+            // Hide game overlay and show mission brief
+            if (gameOverlay) gameOverlay.classList.add('hidden');
+            missionBriefOverlay.classList.remove('hidden');
+            
+            // Hide the canvas (stop rendering)
+            if (canvas) canvas.style.display = 'none';
+            
+            // Show toast notification
+            if (typeof showToast === 'function') {
+                showToast('Mission Brief - Get ready to fight!', 'info');
+            }
+        });
+    }
+    
+    // Play Game button (from Mission Brief)
+    if (btnPlayGame && missionBriefOverlay) {
+        btnPlayGame.addEventListener('click', async () => {
+            // Try to get user info from Firebase
+            let userEmail = '';
+            let userWhatsapp = '';
+            
+            // Get current user from Firebase Auth
+            if (typeof auth !== 'undefined' && auth.currentUser) {
+                const user = auth.currentUser;
+                userEmail = user.email;
+                
+                // Fetch user data from Firestore
+                if (typeof db !== 'undefined') {
+                    try {
+                        const userDoc = await db.collection('users').doc(user.uid).get();
+                        if (userDoc.exists) {
+                            const userData = userDoc.data();
+                            userWhatsapp = userData.whatsapp || '';
+                        }
+                    } catch (e) {
+                        console.log('Could not fetch user data:', e);
+                    }
+                }
+            }
+            
+            // Show payment instructions modal
+            if (typeof showPaymentInstructions === 'function') {
+                showPaymentInstructions(userEmail, userWhatsapp);
+            } else {
+                // Fallback: hide mission brief and show game
+                missionBriefOverlay.classList.add('hidden');
+                if (gameOverlay) gameOverlay.classList.remove('hidden');
+                if (canvas) canvas.style.display = 'block';
+            }
+            
+            // Show toast notification
+            if (typeof showToast === 'function') {
+                showToast('Please complete payment to play!', 'info');
+            }
+        });
+    }
 }
 
 // ========================================
