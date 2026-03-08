@@ -482,7 +482,7 @@ function drawZombies() {
         const healthPercent = zombie.health / zombie.maxHealth;
         ctx.fillStyle = '#333333';
         ctx.fillRect(-15, -zombie.size / 2 - 10, 30, 5);
-        ctx.fillStyle = healthPercent > 0.5 ? '#39ff14' : '#e63946';
+        ctx.fillStyle = healthPercent > 0.5 ? '#ff3333' : '#e63946';
         ctx.fillRect(-15, -zombie.size / 2 - 10, 30 * healthPercent, 5);
         
         ctx.restore();

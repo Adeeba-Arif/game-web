@@ -68,7 +68,7 @@
 
 .mission-card[data-mission="1"]::before,
 .mission-card[data-mission="2"]::before {
-    background: linear-gradient(90deg, #39ff14, #00ff00);
+    background: linear-gradient(90deg, #ff3333, #cc0000);
 }
 
 .mission-card[data-mission="3"]::before,
@@ -147,9 +147,9 @@
 }
 
 .mission-difficulty.easy {
-    background: rgba(57, 255, 20, 0.2);
-    color: #39ff14;
-    border: 1px solid #39ff14;
+    background: rgba(255, 51, 51, 0.2);
+    color: #ff3333;
+    border: 1px solid #ff3333;
 }
 
 .mission-difficulty.medium {
@@ -211,6 +211,22 @@
 .btn-mission-start.locked:hover {
     transform: none;
     box-shadow: none;
+}
+
+/* Locked mission card */
+.mission-card.locked {
+    opacity: 0.6;
+    border-color: #333;
+}
+
+.mission-card.locked .mission-icon {
+    background: #2a2a3e;
+    color: #555;
+}
+
+.mission-card.locked .mission-number {
+    background: #2a2a3e;
+    color: #555;
 }
 
 /* Responsive */
