@@ -14,8 +14,8 @@ let db = null;
 let currentUser = null;
 let userData = null;
 
-// Demo mode flag
-const DEMO_MODE = true;
+// Demo mode flag - set to false to use Firebase
+const DEMO_MODE = false;
 
 // ========================================
 // DOM ELEMENTS
@@ -40,6 +40,8 @@ const elements = {
     registerForm: document.getElementById('registerForm'),
     googleAuth: document.getElementById('googleAuth'),
     showRegister: document.getElementById('showRegister'),
+    heroRegisterBtn: document.getElementById('heroRegisterBtn'),
+    ctaRegisterBtn: document.getElementById('ctaRegisterBtn'),
     modalClose: document.querySelectorAll('.modal-close'),
     
     // Dashboard
@@ -102,27 +104,28 @@ document.addEventListener('DOMContentLoaded', function() {
 // FIREBASE INITIALIZATION
 // ========================================
 function initializeFirebase() {
-    // Check if Firebase is properly configured
-    if (firebaseConfig.apiKey === 'YOUR_API_KEY' || !firebaseConfig.apiKey) {
-        console.log('Firebase not configured. Running in demo mode.');
-        return;
-    }
-    
     try {
+        // Check if firebase and config exist
+        if (typeof firebase === 'undefined') {
+            console.error('Firebase SDK not found!');
+            return;
+        }
+        if (typeof firebaseConfig === 'undefined') {
+            console.error('firebaseConfig not found!');
+            return;
+        }
+        
         // Initialize Firebase
         firebaseApp = firebase.initializeApp(firebaseConfig);
-        firebaseAuth = firebase.auth;
-        firebaseFirestore = firebase.firestore;
-        
-        auth = firebaseAuth(firebaseApp);
-        db = firebaseFirestore(firebaseApp);
+        auth = firebase.auth();
+        db = firebase.firestore();
         
         // Listen for auth state changes
         auth.onAuthStateChanged(handleAuthStateChange);
         
-        console.log('Firebase initialized successfully');
+        console.log('Firebase initialized! Auth:', auth);
     } catch (error) {
-        console.error('Firebase initialization error:', error);
+        console.error('Firebase Error:', error.message);
     }
 }
 
@@ -466,6 +469,22 @@ function initAuth() {
         });
     }
     
+    // Hero register button - open register modal
+    if (elements.heroRegisterBtn) {
+        elements.heroRegisterBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal(elements.registerModal);
+        });
+    }
+    
+    // CTA register button - open register modal
+    if (elements.ctaRegisterBtn) {
+        elements.ctaRegisterBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal(elements.registerModal);
+        });
+    }
+    
     // Close dashboard
     if (elements.closeDashboard) {
         elements.closeDashboard.addEventListener('click', () => {
@@ -557,15 +576,21 @@ async function handleRegister(e) {
         return;
     }
     
-    if (!auth) {
-        showToast('Authentication not configured', 'error');
-        return;
-    }
-    
     try {
+        console.log('Starting registration with:', email, whatsapp);
+        console.log('Auth object:', auth);
+        console.log('DB object:', db);
+        
+        if (!auth) {
+            showToast('Authentication not configured - please check console', 'error');
+            console.error('Auth is null or undefined');
+            return;
+        }
+        
         showToast('Creating account...', 'info');
         
         const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+        console.log('User created:', userCredential.user);
         
         // Create user document in Firestore
         if (db) {
@@ -579,18 +604,29 @@ async function handleRegister(e) {
                 paymentStatus: 'pending',
                 createdAt: new Date().toISOString()
             });
+            console.log('User document created in Firestore');
         }
         
         // Send email notification (simulated - in production use a backend service)
         await sendRegistrationEmail(email, whatsapp);
+        console.log('Registration email sent');
         
-        // Show payment instructions
-        showPaymentInstructions(email, whatsapp);
+        // Show success message
+        showToast('Registered successfully!', 'success');
         
+        // Close modal and redirect to home
         closeModal(elements.registerModal);
         elements.registerForm.reset();
+        
+        // Redirect to home page after short delay
+        setTimeout(() => {
+            window.location.href = '../index.html';
+        }, 1500);
     } catch (error) {
         console.error('Registration error:', error);
+        console.error('Error code:', error.code);
+        console.error('Error message:', error.message);
+        alert('Registration Error: ' + error.message);
         showToast(getAuthErrorMessage(error.code), 'error');
     }
 }
@@ -690,14 +726,31 @@ function handleDemoRegister(email, whatsapp) {
     closeModal(elements.registerModal);
     if (elements.registerForm) elements.registerForm.reset();
     
-    // Send notification (simulated)
-    console.log('=== DEMO EMAIL NOTIFICATION ===');
+    // Show success message
+    showToast('Registered successfully!', 'success');
+    
+    // Send email notification to official email
+    const subject = encodeURIComponent('New Player Registration - The Dark World');
+    const body = encodeURIComponent(
+        `New Player Registration Details:\n\n` +
+        `Email: ${email}\n` +
+        `WhatsApp: ${whatsapp}\n` +
+        `Registration Date: ${new Date().toLocaleString()}\n\n` +
+        `Please process this registration.`
+    );
+    
+    // Open email client with registration details
+    window.open(`mailto:thedarkworld.8304@gmail.com?subject=${subject}&body=${body}`, '_blank');
+    
+    // Redirect to home page after short delay
+    setTimeout(() => {
+        window.location.href = '../index.html';
+    }, 1500);
+    
+    // Log for demo purposes
+    console.log('=== EMAIL NOTIFICATION SENT ===');
     console.log('To: thedarkworld.8304@gmail.com');
     console.log(`New player: ${email}, WhatsApp: ${whatsapp}`);
-    showToast('Admin notified of your registration!', 'success');
-    
-    // Show payment instructions
-    showPaymentInstructions(email, whatsapp || 'Not provided');
 }
 
 // ========================================

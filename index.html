@@ -69,13 +69,29 @@
                 <span class="nav-icon"><i class="fas fa-home"></i></span>
                 <span>Home</span>
             </a></li>
-            <li><a href="pages/missions.html" class="nav-link" data-page="missions">
-                <span class="nav-icon"><i class="fas fa-tasks"></i></span>
-                <span>Missions</span>
-            </a></li>
-            <li><a href="pages/about.html" class="nav-link" data-page="about">
-                <span class="nav-icon"><i class="fas fa-info-circle"></i></span>
+            <li><a href="#about" class="nav-link" data-page="about">
+                <span class="nav-icon"><i class="fas fa-gamepad"></i></span>
                 <span>About</span>
+            </a></li>
+            <li><a href="#story" class="nav-link" data-page="story">
+                <span class="nav-icon"><i class="fas fa-book-skull"></i></span>
+                <span>Story</span>
+            </a></li>
+            <li><a href="#enemies" class="nav-link" data-page="enemies">
+                <span class="nav-icon"><i class="fas fa-biohazard"></i></span>
+                <span>Enemies</span>
+            </a></li>
+            <li><a href="#features" class="nav-link" data-page="features">
+                <span class="nav-icon"><i class="fas fa-khanda"></i></span>
+                <span>Features</span>
+            </a></li>
+            <li><a href="#gallery" class="nav-link" data-page="gallery">
+                <span class="nav-icon"><i class="fas fa-images"></i></span>
+                <span>Gallery</span>
+            </a></li>
+            <li><a href="#join" class="nav-link" data-page="join">
+                <span class="nav-icon"><i class="fas fa-user-plus"></i></span>
+                <span>Join</span>
             </a></li>
         </ul>
         <div class="nav-auth">
@@ -96,8 +112,13 @@
     <div class="mobile-menu">
         <ul class="mobile-nav-links">
             <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="#about"><i class="fas fa-gamepad"></i> About</a></li>
+            <li><a href="#story"><i class="fas fa-book-skull"></i> Story</a></li>
+            <li><a href="#enemies"><i class="fas fa-biohazard"></i> Enemies</a></li>
+            <li><a href="#features"><i class="fas fa-khanda"></i> Features</a></li>
+            <li><a href="#gallery"><i class="fas fa-images"></i> Gallery</a></li>
+            <li><a href="#join"><i class="fas fa-user-plus"></i> Join</a></li>
             <li><a href="pages/missions.html"><i class="fas fa-tasks"></i> Missions</a></li>
-            <li><a href="pages/about.html"><i class="fas fa-info-circle"></i> About</a></li>
         </ul>
     </div>
 
@@ -107,24 +128,29 @@
         <section id="home" class="page-section active" data-page="home">
             <!-- Hero Section -->
             <section class="hero-section">
+                <div class="hero-video-background">
+                    <video autoplay muted loop playsinline id="heroVideo">
+                        <source src="assets/WhatsApp Video 2026-03-05 at 5.22.48 AM.mp4" type="video/mp4">
+                    </video>
+                    <div class="hero-video-overlay"></div>
+                </div>
                 <div class="hero-container">
                     <div class="hero-content">
                         <div class="hero-badge">
-                            <span class="badge-text">OFFICIAL GAME PORTAL</span>
+                            <span class="badge-text">Official Game Portal</span>
                         </div>
                         <h1 class="hero-title">
-                            <span class="title-line title-line-1 glitch" data-text="SURVIVE">SURVIVE</span>
-                            <span class="title-line title-line-2 glitch" data-text="THE HORDE">THE HORDE</span>
+                            <span class="title-line title-line-1">Survive</span>
+                            <span class="title-line title-line-2">The Horde</span>
                         </h1>
-                        <p class="hero-subtitle">The world has fallen. Humanity's last stand begins NOW. Join the resistance and fight for survival in the ultimate zombie apocalypse experience.</p>
+                        <p class="hero-subtitle">The world has fallen. Humanity's last stand begins now. Join the resistance and fight for survival in the ultimate zombie apocalypse experience.</p>
                         <div class="hero-buttons">
-                            <a href="pages/game.html" class="btn-primary btn-play">
+                            <a href="#" id="heroRegisterBtn" class="btn-primary btn-play">
                                 <span class="btn-icon"><i class="fas fa-credit-card"></i></span>
-                                <span class="btn-text">SUBMIT 500 PKR TO JOIN</span>
-                                <span class="btn-glow"></span>
+                                <span class="btn-text">Submit 500 PKR to Join</span>
                             </a>
                             <a href="pages/about.html" class="btn-secondary">
-                                <span class="btn-text">LEARN MORE</span>
+                                <span class="btn-text">Learn More</span>
                                 <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
                             </a>
                         </div>
@@ -145,8 +171,301 @@
                     </div>
                 </div>
                 <div class="scroll-indicator">
-                    <span>SCROLL FOR MORE</span>
+                    <span>Scroll for More</span>
                     <i class="fas fa-chevron-down"></i>
+                </div>
+            </section>
+
+            <!-- About The Game Section -->
+            <section class="about-game-section" id="about">
+                <div class="section-container">
+                    <div class="about-game-content">
+                        <div class="about-game-text">
+                            <h2 class="section-title">
+                                <span class="title-icon"><i class="fas fa-gamepad"></i></span>
+                                About The Game
+                                <span class="title-decoration"></span>
+                            </h2>
+                            <p class="about-game-intro">The Dark World is an intense survival horror game that puts you in the middle of a global zombie apocalypse. Fight for humanity's survival against endless waves of the undead.</p>
+                            <div class="about-game-features">
+                                <div class="about-feature">
+                                    <div class="about-feature-icon"><i class="fas fa-skull"></i></div>
+                                    <div class="about-feature-info">
+                                        <h4>Immersive Story</h4>
+                                        <p>Experience a gripping narrative of survival, loss, and hope in a world consumed by darkness.</p>
+                                    </div>
+                                </div>
+                                <div class="about-feature">
+                                    <div class="about-feature-icon"><i class="fas fa-crosshairs"></i></div>
+                                    <div class="about-feature-info">
+                                        <h4>Action-Packed Gameplay</h4>
+                                        <p>Engage in intense combat with a variety of weapons against countless zombie variants.</p>
+                                    </div>
+                                </div>
+                                <div class="about-feature">
+                                    <div class="about-feature-icon"><i class="fas fa-users"></i></div>
+                                    <div class="about-feature-info">
+                                        <h4>Multiplayer Co-op</h4>
+                                        <p>Team up with friends or other survivors to take on the horde together.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="about-game-visual">
+                            <div class="about-image-frame">
+                                <img src="assets/WhatsApp Image 2026-03-05 at 5.22.49 AM.jpeg" alt="The Dark World Gameplay" onerror="this.style.display='none'">
+                                <div class="frame-corner top-left"></div>
+                                <div class="frame-corner top-right"></div>
+                                <div class="frame-corner bottom-left"></div>
+                                <div class="frame-corner bottom-right"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Story Section -->
+            <section class="story-section-full" id="story">
+                <div class="section-container">
+                    <h2 class="section-title light">
+                        <span class="title-icon"><i class="fas fa-book-skull"></i></span>
+                        The Story
+                        <span class="title-decoration"></span>
+                    </h2>
+                    <div class="story-timeline">
+                        <div class="story-card">
+                            <div class="story-year">Day 0</div>
+                            <div class="story-content">
+                                <h3>The Beginning</h3>
+                                <p>It started like any other day. People going to work, children going to school, life continuing as normal. Then came the news reports - a strange virus spreading across the globe.</p>
+                            </div>
+                        </div>
+                        <div class="story-card">
+                            <div class="story-year">Day 7</div>
+                            <div class="story-content">
+                                <h3>The Collapse</h3>
+                                <p>Within days, the world as we knew it had ended. Governments fell, cities burned, and the dead began to rise. The infected don't just want to kill you - they want to make you one of them.</p>
+                            </div>
+                        </div>
+                        <div class="story-card">
+                            <div class="story-year">Day 30</div>
+                            <div class="story-content">
+                                <h3>The Resistance</h3>
+                                <p>Humanity didn't go down without a fight. Survivors banded together, establishing hidden enclaves and resistance cells. You are one of these survivors.</p>
+                            </div>
+                        </div>
+                        <div class="story-card">
+                            <div class="story-year">Present</div>
+                            <div class="story-content">
+                                <h3>Your Story</h3>
+                                <p>You are a survivor. One of the few who managed to escape the initial outbreak. You've seen friends become enemies, watched cities fall, and learned that the only rule in this new world is <strong>survive or become them</strong>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Enemies Section -->
+            <section class="enemies-section" id="enemies">
+                <div class="section-container">
+                    <h2 class="section-title">
+                        <span class="title-icon"><i class="fas fa-biohazard"></i></span>
+                        The Horde
+                        <span class="title-decoration"></span>
+                    </h2>
+                    <p class="section-subtitle">Know your enemy. Every variant brings new challenges.</p>
+                    <div class="enemies-grid">
+                        <div class="enemy-card">
+                            <div class="enemy-image">
+                                <div class="enemy-icon walker"><i class="fas fa-walking"></i></div>
+                            </div>
+                            <div class="enemy-info">
+                                <h3>Walkers</h3>
+                                <span class="enemy-difficulty easy">Basic</span>
+                                <p>The common infected. Slow but relentless. One bite is all it takes to join the horde.</p>
+                                <ul class="enemy-stats">
+                                    <li><i class="fas fa-fist-raised"></i> Low Damage</li>
+                                    <li><i class="fas fa-bolt"></i> Slow Speed</li>
+                                    <li><i class="fas fa-heart"></i> Low Health</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="enemy-card">
+                            <div class="enemy-image">
+                                <div class="enemy-icon runner"><i class="fas fa-running"></i></div>
+                            </div>
+                            <div class="enemy-info">
+                                <h3>Runners</h3>
+                                <span class="enemy-difficulty medium">Dangerous</span>
+                                <p>Fast and aggressive. They hunt in packs and strike without warning.</p>
+                                <ul class="enemy-stats">
+                                    <li><i class="fas fa-fist-raised"></i> Medium Damage</li>
+                                    <li><i class="fas fa-bolt"></i> Very Fast</li>
+                                    <li><i class="fas fa-heart"></i> Low Health</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="enemy-card">
+                            <div class="enemy-image">
+                                <div class="enemy-icon tank"><i class="fas fa-shield-alt"></i></div>
+                            </div>
+                            <div class="enemy-info">
+                                <h3>Tanks</h3>
+                                <span class="enemy-difficulty hard">Deadly</span>
+                                <p>Massive and powerful. Takes multiple hits to bring down. Their embrace is fatal.</p>
+                                <ul class="enemy-stats">
+                                    <li><i class="fas fa-fist-raised"></i> Extreme Damage</li>
+                                    <li><i class="fas fa-bolt"></i> Slow Speed</li>
+                                    <li><i class="fas fa-heart"></i> Very High Health</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="enemy-card">
+                            <div class="enemy-image">
+                                <div class="enemy-icon crawler"><i class="fas fa-spider"></i></div>
+                            </div>
+                            <div class="enemy-info">
+                                <h3>Crawlers</h3>
+                                <span class="enemy-difficulty medium">Tricky</span>
+                                <p>Move on all fours and can squeeze through tight spaces. Hard to hit but fragile.</p>
+                                <ul class="enemy-stats">
+                                    <li><i class="fas fa-fist-raised"></i> Low Damage</li>
+                                    <li><i class="fas fa-bolt"></i> Fast Speed</li>
+                                    <li><i class="fas fa-heart"></i> Very Low Health</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="enemy-card">
+                            <div class="enemy-image">
+                                <div class="enemy-icon spitter"><i class="fas fa-mouth"></i></div>
+                            </div>
+                            <div class="enemy-info">
+                                <h3>Spitters</h3>
+                                <span class="enemy-difficulty hard">Hazardous</span>
+                                <p>Projectile attackers that can hit you from distance with toxic acid.</p>
+                                <ul class="enemy-stats">
+                                    <li><i class="fas fa-fist-raised"></i> Ranged Attack</li>
+                                    <li><i class="fas fa-bolt"></i> Medium Speed</li>
+                                    <li><i class="fas fa-heart"></i> Medium Health</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="enemy-card">
+                            <div class="enemy-image">
+                                <div class="enemy-icon mutator"><i class="fas fa-dna"></i></div>
+                            </div>
+                            <div class="enemy-info">
+                                <h3>Mutators</h3>
+                                <span class="enemy-difficulty extreme">Nightmare</span>
+                                <p>Highly mutated creatures with unique abilities. The nightmare versions of the infected.</p>
+                                <ul class="enemy-stats">
+                                    <li><i class="fas fa-fist-raised"></i> High Damage</li>
+                                    <li><i class="fas fa-bolt"></i> Variable Speed</li>
+                                    <li><i class="fas fa-heart"></i> High Health</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Gameplay Features Section -->
+            <section class="features-section" id="features">
+                <div class="section-container">
+                    <h2 class="section-title light">
+                        <span class="title-icon"><i class="fas fa-khanda"></i></span>
+                        Gameplay Features
+                        <span class="title-decoration"></span>
+                    </h2>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-wave-square"></i></div>
+                            <h3>Wave-Based Survival</h3>
+                            <p>Fight endless waves of zombies that increase in difficulty. How long can you survive?</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-weapons"></i></div>
+                            <h3>Weapon Arsenal</h3>
+                            <p>Collect and upgrade a wide variety of weapons from pistols to heavy artillery.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-search"></i></div>
+                            <h3>Resource Scavenging</h3>
+                            <p>Search for supplies, ammo, and upgrades to survive longer in the apocalyptic world.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-users-cog"></i></div>
+                            <h3>Character Progression</h3>
+                            <p>Level up your survivor, unlock new skills, and become a force against the horde.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-shield-virus"></i></div>
+                            <h3>Base Building</h3>
+                            <p>Establish and fortify safe zones to rest, craft, and prepare for the next wave.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-trophy"></i></div>
+                            <h3>Achievements</h3>
+                            <p>Complete challenges and earn rewards that showcase your survival skills.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Media Gallery Section -->
+            <section class="gallery-section" id="gallery">
+                <div class="section-container">
+                    <h2 class="section-title">
+                        <span class="title-icon"><i class="fas fa-images"></i></span>
+                        Media Gallery
+                        <span class="title-decoration"></span>
+                    </h2>
+                    <div class="gallery-grid">
+                        <div class="gallery-item gallery-large">
+                            <img src="assets/WhatsApp Image 2026-03-05 at 5.22.49 AM.jpeg" alt="Game Screenshot" onerror="this.style.display='none'">
+                            <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="assets/WhatsApp Image 2026-03-05 at 5.22.49 AM (1).jpeg" alt="Game Screenshot" onerror="this.style.display='none'">
+                            <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="assets/WhatsApp Image 2026-03-05 at 5.22.49 AM (2).jpeg" alt="Game Screenshot" onerror="this.style.display='none'">
+                            <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="assets/WhatsApp Image 2026-03-05 at 5.22.48 AM.jpeg" alt="Game Screenshot" onerror="this.style.display='none'">
+                            <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="assets/WhatsApp Image 2026-03-05 at 5.22.48 AM (1).jpeg" alt="Game Screenshot" onerror="this.style.display='none'">
+                            <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Call to Action Section -->
+            <section class="cta-section" id="join">
+                <div class="cta-background"></div>
+                <div class="section-container">
+                    <div class="cta-content">
+                        <h2 class="cta-title">Join the Resistance</h2>
+                        <p class="cta-text">The world needs survivors. Join thousands of players fighting for humanity's survival. Your journey begins now.</p>
+                        <div class="cta-features">
+                            <div class="cta-feature"><i class="fas fa-check"></i> Instant Access</div>
+                            <div class="cta-feature"><i class="fas fa-check"></i> Free to Play</div>
+                            <div class="cta-feature"><i class="fas fa-check"></i> Regular Updates</div>
+                        </div>
+                        <div class="cta-buttons">
+                            <a href="#" id="ctaRegisterBtn" class="btn-cta-primary">
+                                <i class="fas fa-user-plus"></i> Submit 500 PKR to Join
+                            </a>
+                            <a href="pages/about.html" class="btn-cta-secondary">
+                                <i class="fas fa-info-circle"></i> Learn More
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -385,7 +704,7 @@
                     <label for="loginWhatsapp">WhatsApp Number</label>
                     <div class="input-wrapper">
                         <i class="fab fa-whatsapp"></i>
-                        <input type="tel" id="loginWhatsapp" name="loginWhatsapp" placeholder="+1 234 567 8900">
+                        <input type="tel" id="loginWhatsapp" name="loginWhatsapp" placeholder="+92 000 000 0000">
                     </div>
                 </div>
                 <div class="form-group">
@@ -435,7 +754,7 @@
                     <label for="regWhatsapp">WhatsApp Number</label>
                     <div class="input-wrapper">
                         <i class="fab fa-whatsapp"></i>
-                        <input type="tel" id="regWhatsapp" name="regWhatsapp" placeholder="+1 234 567 8900" required>
+                        <input type="tel" id="regWhatsapp" name="regWhatsapp" placeholder="+92 000 000 0000" required>
                     </div>
                 </div>
                 <div class="form-group">
@@ -505,10 +824,14 @@
     <!-- Assets Configuration -->
     <script src="assets-config.js"></script>
     
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js"></script>
+    <!-- Environment Configuration -->
+    <script src="env.js"></script>
+    
+    <!-- Firebase SDK (Compatibility Version) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
     
     <!-- Firebase Config -->
     <script src="firebase-config.js"></script>
