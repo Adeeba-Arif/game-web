@@ -359,14 +359,17 @@ body {
 
 .logo-icon {
     font-size: 1.8rem;
-    color: #c4a059;
+    color: #ffffff;
+    opacity: 0.9;
 }
 
 .logo-text {
     font-family: 'Bebas Neue', 'Oswald', sans-serif;
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     color: #ffffff;
-    letter-spacing: 3px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: 400;
 }
 
 .nav-links {
@@ -2057,9 +2060,8 @@ body {
 
 .footer-logo-icon {
     font-size: 3rem;
-    color: var(--primary-red);
+    color: #ffffff;
     margin-bottom: 15px;
-    text-shadow: var(--shadow-red);
 }
 
 .footer-logo h3 {
@@ -2407,7 +2409,7 @@ body {
 }
 
 .glitch::after {
-    color: var(--primary-red);
+    color: #ffffff;
     animation: glitch2 3s infinite linear alternate-reverse;
     clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
 }
