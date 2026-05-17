@@ -9,11 +9,11 @@
 
     // ── Configuration ──────────────────────────────────────────────────────────
     var CFG = {
-        // Local Nodemailer email server (primary relay — see email-server.js)
-        serverUrl:  window.env?.VITE_EMAIL_SERVER_URL    || 'http://localhost:3001',
-
-        // Google Apps Script web-app URL (secondary fallback — free, no API key needed)
+        // Google Apps Script web-app URL (primary relay — public URL, works from any browser)
         gasUrl:     window.env?.VITE_GAS_WEB_APP_URL     || '',
+
+        // Local Nodemailer email server (dev/testing fallback — see email-server.js)
+        serverUrl:  window.env?.VITE_EMAIL_SERVER_URL    || 'http://localhost:3001',
 
         adminEmail: window.env?.VITE_ADMIN_EMAIL          || 'thedarkworld.8304@gmail.com',
         fromName:   window.env?.VITE_EMAIL_FROM_NAME      || 'The Dark World',
@@ -112,23 +112,24 @@
     // ── Unified send helper ────────────────────────────────────────────────────
 
     /**
-     * Try local Nodemailer server first, then GAS, then mailto: fallback.
+     * Try Google Apps Script first (public URL, works from any browser),
+     * then local Nodemailer server (dev/testing), then mailto: fallback.
      */
     async function sendEmail(to, subject, message, name) {
-        // 1️⃣ Try local Nodemailer server
-        try {
-            return await sendViaServer(to, subject, message, name);
-        } catch (err) {
-            console.warn('[EmailService] Local server failed, trying GAS…', err.message);
-        }
-
-        // 2️⃣ Try Google Apps Script
+        // 1️⃣ Try Google Apps Script (works from any browser — primary for production)
         if (CFG.gasUrl && CFG.gasUrl.indexOf('YOUR_SCRIPT_ID') === -1) {
             try {
                 return await sendViaGAS(to, subject, message, name);
             } catch (err) {
-                console.warn('[EmailService] GAS failed, falling back to mailto:…', err.message);
+                console.warn('[EmailService] GAS failed, trying local server…', err.message);
             }
+        }
+
+        // 2️⃣ Try local Nodemailer server (dev/testing only — localhost is not reachable from other machines)
+        try {
+            return await sendViaServer(to, subject, message, name);
+        } catch (err) {
+            console.warn('[EmailService] Local server failed, falling back to mailto:…', err.message);
         }
 
         // 3️⃣ Fall back to mailto:
@@ -175,14 +176,14 @@
     var EmailService = {
 
         get ready() {
-            return _serverAlive ||
-                   (!!CFG.gasUrl && CFG.gasUrl.indexOf('YOUR_SCRIPT_ID') === -1);
+            return (!!CFG.gasUrl && CFG.gasUrl.indexOf('YOUR_SCRIPT_ID') === -1) || _serverAlive;
         },
 
         get initError() {
             if (this.ready) return null;
             return 'No email relay reachable. ' +
-                   'Start the local server (node email-server.js) or set VITE_GAS_WEB_APP_URL in env.js.';
+                   'Set VITE_GAS_WEB_APP_URL in env.js (see GOOGLE_APPS_SCRIPT_SETUP.md) ' +
+                   'or start the local server (node email-server.js).';
         },
 
         async sendUserConfirmation(userEmail, username, timestamp) {
@@ -308,7 +309,7 @@
     }
 
     console.info('[EmailService] Service ready:', EmailService.ready);
-    console.info('[EmailService] Priority: 1) Local server  →  2) GAS  →  3) mailto: fallback');
+    console.info('[EmailService] Priority: 1) GAS (public URL)  →  2) Local server  →  3) mailto: fallback');
 
     // Probe the local email server in the background
     probeServer().then(function (alive) {

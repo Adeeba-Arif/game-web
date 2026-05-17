@@ -11,15 +11,15 @@ window.env = {
     VITE_FIREBASE_APP_ID:         "1:171565764612:web:ef4eb637be822615eae551",
     VITE_FIREBASE_MEASUREMENT_ID: "G-783HTJWQ02",
 
-    // ── Email Server (primary relay) ───────────────────────────────────────────
-    // URL of the local Nodemailer email server (email-server.js).
-    // Change this if you deploy the server elsewhere.
-    VITE_EMAIL_SERVER_URL: "http://localhost:3001",
-
-    // ── Google Apps Script (secondary fallback) ─────────────────────────────────
+    // ── Google Apps Script (primary relay) ─────────────────────────────────────
     // Web-app URL for the GAS email relay (see GOOGLE_APPS_SCRIPT_SETUP.md).
-    // Leave empty unless you have deployed a GAS script.
+    // This is a public URL — it works from any user's browser.
     VITE_GAS_WEB_APP_URL: "",
+
+    // ── Email Server (dev/testing fallback) ────────────────────────────────────
+    // URL of the local Nodemailer email server (email-server.js).
+    // Only reachable from the machine running the server — not from other users' browsers.
+    VITE_EMAIL_SERVER_URL: "http://localhost:3001",
 
     // ── Email Settings ──────────────────────────────────────────────────────────
     VITE_ADMIN_EMAIL:      "thedarkworld.8304@gmail.com",
