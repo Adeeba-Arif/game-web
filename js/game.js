@@ -43,6 +43,52 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function initGame() {
+    // ---- Login Gate: block game access until user is authenticated ----
+    const gateOverlay = document.getElementById('loginGateOverlay');
+    const btnJoinGameGate = document.getElementById('btnJoinGameGate');
+
+    function showGate() {
+        if (gateOverlay) gateOverlay.classList.remove('hidden');
+    }
+
+    function hideGate() {
+        if (gateOverlay) gateOverlay.classList.add('hidden');
+    }
+
+    // If user is already logged in (Firebase or demo), hide the gate
+    if (typeof currentUser !== 'undefined' && currentUser !== null) {
+        hideGate();
+    } else if (typeof auth !== 'undefined' && auth) {
+        // Firebase available – listen for auth state and hide gate on login
+        auth.onAuthStateChanged(function(user) {
+            if (user) {
+                hideGate();
+            } else {
+                showGate();
+            }
+        });
+    } else {
+        // No auth at all – show gate
+        showGate();
+    }
+
+    // Gate button opens the register modal on the game page
+    if (btnJoinGameGate) {
+        btnJoinGameGate.addEventListener('click', function() {
+            var regModal = document.getElementById('registerModal');
+            if (regModal) {
+                regModal.style.display = 'flex';
+            } else {
+                window.location.href = '../index.html';
+            }
+        });
+    }
+
+    // If gate is visible, stop here – don't initialise the game
+    if (gateOverlay && !gateOverlay.classList.contains('hidden')) {
+        return;
+    }
+
     // Get canvas
     canvas = document.getElementById('gameCanvas');
     if (!canvas) return;

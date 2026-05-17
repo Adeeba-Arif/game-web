@@ -6,6 +6,7 @@
     <title>Play Game - The Dark World</title>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/game.css">
+    <link rel="stylesheet" href="../css/game-gate.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -93,6 +94,19 @@
     <!-- Game Page -->
     <main class="game-page">
         <div class="game-container">
+            <!-- Login Gate Overlay – blocks access until user is logged in -->
+            <div class="login-gate-overlay" id="loginGateOverlay">
+                <div class="login-gate-content">
+                    <div class="login-gate-icon"><i class="fas fa-lock"></i></div>
+                    <h2>LOCKED</h2>
+                    <p>You must be logged in to access the game.</p>
+                    <p class="login-gate-sub">Join the resistance and create an account to play.</p>
+                    <button class="btn-join-game" id="btnJoinGameGate">
+                        <span><i class="fas fa-user-plus"></i> JOIN THE RESISTANCE</span>
+                    </button>
+                </div>
+            </div>
+
             <!-- Game Header -->
             <div class="game-header">
                 <div class="game-stats">

@@ -173,7 +173,7 @@ function handleAuthStateChange(user) {
         // Update UI with user info
         const displayName = user.displayName || user.email.split('@')[0];
         if (elements.userName) elements.userName.textContent = displayName;
-        if (elements.navUserName) elements.navUserName.textContent = displayName;
+        if (elements.navUserName) elements.navUserName.textContent = 'Welcome, ' + displayName;
         
         // Fetch user data from Firestore
         fetchUserData(user.uid);
@@ -224,7 +224,7 @@ async function fetchUserData(uid) {
             userData = userDoc.data();
             // Update nav username from Firestore data
             if (userData.username && elements.navUserName) {
-                elements.navUserName.textContent = userData.username;
+                elements.navUserName.textContent = 'Welcome, ' + userData.username;
             }
         } else {
             // Create new user document
@@ -782,7 +782,7 @@ function handleDemoLogin(email) {
     if (elements.loginBtn)    elements.loginBtn.classList.add('hidden');
     if (elements.logoutBtn)   elements.logoutBtn.classList.remove('hidden');
     if (elements.userInfoMini) elements.userInfoMini.style.display = 'flex';
-    if (elements.navUserName) elements.navUserName.textContent = displayName;
+    if (elements.navUserName) elements.navUserName.textContent = 'Welcome, ' + displayName;
     
     // Set demo user data
     userData = {
@@ -813,7 +813,7 @@ function handleDemoRegister(email, username) {
     if (elements.userInfoMini) elements.userInfoMini.style.display = 'flex';
 
     // Update nav username
-    if (elements.navUserName) elements.navUserName.textContent = currentUser.displayName;
+    if (elements.navUserName) elements.navUserName.textContent = 'Welcome, ' + currentUser.displayName;
 
     // Set demo user data
     userData = {
