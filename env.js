@@ -14,7 +14,7 @@ window.env = {
     // ── Google Apps Script (primary relay) ─────────────────────────────────────
     // Web-app URL for the GAS email relay (see GOOGLE_APPS_SCRIPT_SETUP.md).
     // This is a public URL — it works from any user's browser.
-    VITE_GAS_WEB_APP_URL: "",
+    VITE_GAS_WEB_APP_URL: "https://script.google.com/macros/s/AKfycbzvhaKTvHVIFQ488Mh37l7m-Cv6Ny82rmAoyYAwjvk-eD_M8fFLh_zsVVEzLOAj8Az7VQ/exec",
 
     // ── Email Server (dev/testing fallback) ────────────────────────────────────
     // URL of the local Nodemailer email server (email-server.js).

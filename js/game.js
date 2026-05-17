@@ -105,14 +105,13 @@ function setupEventListeners() {
             let isLoggedIn = false;
             let userEmail = '';
             
-            if (typeof auth !== 'undefined' && auth.currentUser) {
-                isLoggedIn = true;
-                const user = auth.currentUser;
-                userEmail = user.email;
-                        }
-                    } catch (e) {
-                        console.log('Could not fetch user data:', e);
-                    }
+            if (window.auth && window.auth.currentUser) {
+                try {
+                    isLoggedIn = true;
+                    const user = window.auth.currentUser;
+                    userEmail = user.email;
+                } catch (e) {
+                    console.log('Could not fetch user data:', e);
                 }
             }
             
@@ -136,8 +135,8 @@ function setupEventListeners() {
             }
             
             // Show payment instructions for logged in users
-            if (typeof showPaymentInstructions === 'function') {
-                showPaymentInstructions(userEmail);
+            if (typeof window.showPaymentInstructions === 'function') {
+                window.showPaymentInstructions(userEmail);
             }
             
             if (typeof showToast === 'function') {
@@ -190,14 +189,14 @@ function setupEventListeners() {
             let userWhatsapp = '';
             
             // Get current user from Firebase Auth
-            if (typeof auth !== 'undefined' && auth.currentUser) {
-                const user = auth.currentUser;
+            if (window.auth && window.auth.currentUser) {
+                const user = window.auth.currentUser;
                 userEmail = user.email;
-                
+
                 // Fetch user data from Firestore
-                if (typeof db !== 'undefined') {
+                if (window.db) {
                     try {
-                        const userDoc = await db.collection('users').doc(user.uid).get();
+                        const userDoc = await window.db.collection('users').doc(user.uid).get();
                         if (userDoc.exists) {
                             const userData = userDoc.data();
                             userWhatsapp = userData.whatsapp || '';
@@ -209,8 +208,8 @@ function setupEventListeners() {
             }
             
             // Show payment instructions modal
-            if (typeof showPaymentInstructions === 'function') {
-                showPaymentInstructions(userEmail);
+            if (typeof window.showPaymentInstructions === 'function') {
+                window.showPaymentInstructions(userEmail);
             } else {
                 // Fallback: hide mission brief and show game
                 missionBriefOverlay.classList.add('hidden');
@@ -245,7 +244,8 @@ function startGame() {
     particles = [];
     
     // Hide overlay
-    document.getElementById('gameOverlay').classList.add('hidden');
+    const gameOverlay = document.getElementById('gameOverlay');
+    if (gameOverlay) gameOverlay.classList.add('hidden');
     
     // Start game
     gameRunning = true;
@@ -545,8 +545,10 @@ function createBloodParticles(x, y) {
 // ========================================
 function checkCollisions() {
     // Bullet vs Zombie
-    bullets.forEach((bullet, bi) => {
-        zombies.forEach((zombie, zi) => {
+    for (let i = bullets.length - 1; i >= 0; i--) {
+        const bullet = bullets[i];
+        for (let j = zombies.length - 1; j >= 0; j--) {
+            const zombie = zombies[j];
             const dist = Math.hypot(bullet.x - zombie.x, bullet.y - zombie.y);
             
             if (dist < zombie.size / 2 + bullet.size) {
@@ -554,14 +556,14 @@ function checkCollisions() {
                 zombie.health -= bullet.damage;
                 
                 // Remove bullet
-                bullets.splice(bi, 1);
+                bullets.splice(i, 1);
                 
                 // Create particles
                 createBloodParticles(zombie.x, zombie.y);
                 
                 // Check if zombie died
                 if (zombie.health <= 0) {
-                    zombies.splice(zi, 1);
+                    zombies.splice(j, 1);
                     player.score += 100;
                     player.kills++;
                     
@@ -572,12 +574,16 @@ function checkCollisions() {
                         showToast(`Wave ${player.wave} started!`, 'info');
                     }
                 }
+                
+                // Bullet destroyed, stop checking this bullet against other zombies
+                break;
             }
-        });
-    });
+        }
+    }
     
     // Zombie vs Player
-    zombies.forEach((zombie, zi) => {
+    for (let i = zombies.length - 1; i >= 0; i--) {
+        const zombie = zombies[i];
         const dist = Math.hypot(player.x - zombie.x, player.y - zombie.y);
         
         if (dist < player.size / 2 + zombie.size / 2) {
@@ -589,7 +595,7 @@ function checkCollisions() {
                 gameOver();
             }
         }
-    });
+    }
 }
 
 // ========================================
@@ -644,22 +650,27 @@ function restartGame() {
 
 function quitGame() {
     document.querySelector('.game-over-overlay')?.remove();
-    document.getElementById('gameOverlay').classList.remove('hidden');
+    const gameOverlay = document.getElementById('gameOverlay');
+    if (gameOverlay) gameOverlay.classList.remove('hidden');
 }
 
 // ========================================
 // UI UPDATE
 // ========================================
 function updateUI() {
-    document.getElementById('gameScore').textContent = player.score;
-    document.getElementById('gameLevel').textContent = player.level;
-    document.getElementById('gameWave').textContent = player.wave;
-    document.getElementById('gameKills').textContent = player.kills;
+    const scoreEl = document.getElementById('gameScore');
+    if (scoreEl) scoreEl.textContent = player.score;
+    const levelEl = document.getElementById('gameLevel');
+    if (levelEl) levelEl.textContent = player.level;
+    const waveEl = document.getElementById('gameWave');
+    if (waveEl) waveEl.textContent = player.wave;
+    const killsEl = document.getElementById('gameKills');
+    if (killsEl) killsEl.textContent = player.kills;
     
     const healthFill = document.getElementById('healthFill');
     const healthValue = document.getElementById('healthValue');
-    healthFill.style.width = player.health + '%';
-    healthValue.textContent = Math.max(0, Math.floor(player.health)) + '%';
+    if (healthFill) healthFill.style.width = player.health + '%';
+    if (healthValue) healthValue.textContent = Math.max(0, Math.floor(player.health)) + '%';
 }
 
 // ========================================
@@ -682,19 +693,21 @@ function loadLeaderboard() {
         { name: 'NightStalker', level: 18, score: 98765 }
     ];
     
-    list.innerHTML = leaders.map((leader, index) => `
-        <div class="leaderboard-item">
-            <span class="leaderboard-rank ${index === 0 ? 'gold' : index === 1 ? 'silver' : index === 2 ? 'bronze' : ''}">${index + 1}</span>
-            <div class="leaderboard-avatar">
-                <i class="fas fa-user"></i>
+    if (list) {
+        list.innerHTML = leaders.map((leader, index) => `
+            <div class="leaderboard-item">
+                <span class="leaderboard-rank ${index === 0 ? 'gold' : index === 1 ? 'silver' : index === 2 ? 'bronze' : ''}">${index + 1}</span>
+                <div class="leaderboard-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="leaderboard-info">
+                    <div class="leaderboard-name">${leader.name}</div>
+                    <div class="leaderboard-level">Level ${leader.level}</div>
+                </div>
+                <div class="leaderboard-score">${leader.score.toLocaleString()}</div>
             </div>
-            <div class="leaderboard-info">
-                <div class="leaderboard-name">${leader.name}</div>
-                <div class="leaderboard-level">Level ${leader.level}</div>
-            </div>
-            <div class="leaderboard-score">${leader.score.toLocaleString()}</div>
-        </div>
-    `).join('');
+        `).join('');
+    }
 }
 
 // ========================================

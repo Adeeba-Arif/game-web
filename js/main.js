@@ -526,11 +526,10 @@ function initAuth() {
         });
     }
     
-    // Hero register button - open register modal
+    // Hero register button - direct WhatsApp link
     if (elements.heroRegisterBtn) {
         elements.heroRegisterBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            openModal(elements.registerModal);
+            // Let the href attribute handle the WhatsApp redirect directly
         });
     }
     
@@ -679,9 +678,15 @@ async function handleRegister(e) {
         // Show success message
         showToast('Registered successfully!', 'success');
 
-        // Close modal and redirect to home
+        // Close modal and reset form
         closeModal(elements.registerModal);
         elements.registerForm.reset();
+
+        // Open WhatsApp share popup
+        const gameUrl = window.location.origin + '/index.html';
+        const message = encodeURIComponent(`Hey! I just registered for The Dark World game. You should try it too: ${gameUrl}`);
+        const whatsappUrl = `https://wa.me/?text=${message}`;
+        window.open(whatsappUrl, '_blank', 'width=600,height=400');
 
         // Redirect to home page after short delay
         setTimeout(() => {
@@ -802,6 +807,12 @@ function handleDemoRegister(email) {
 
     // Show success message
     showToast('Registered successfully!', 'success');
+
+    // Open WhatsApp share popup
+    const gameUrl = window.location.origin + '/index.html';
+    const message = encodeURIComponent(`Hey! I just registered for The Dark World game. You should try it too: ${gameUrl}`);
+    const whatsappUrl = `https://wa.me/?text=${message}`;
+    window.open(whatsappUrl, '_blank', 'width=600,height=400');
 
     // Send email notification to official email
     const subject = encodeURIComponent('New Player Registration - The Dark World');
