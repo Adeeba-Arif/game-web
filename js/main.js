@@ -53,6 +53,7 @@ const elements = {
     dashboard: document.getElementById('dashboard'),
     closeDashboard: document.getElementById('closeDashboard'),
     userInfoMini: document.getElementById('userInfoMini'),
+    navUserName: document.getElementById('navUserName'),
     userName: document.getElementById('userName'),
     userLevel: document.getElementById('userLevel'),
     userScore: document.getElementById('userScore'),
@@ -172,6 +173,7 @@ function handleAuthStateChange(user) {
         // Update UI with user info
         const displayName = user.displayName || user.email.split('@')[0];
         if (elements.userName) elements.userName.textContent = displayName;
+        if (elements.navUserName) elements.navUserName.textContent = displayName;
         
         // Fetch user data from Firestore
         fetchUserData(user.uid);
