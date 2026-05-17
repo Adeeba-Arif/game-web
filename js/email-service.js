@@ -50,7 +50,8 @@
     /**
      * Send via Google Apps Script web-app.
      * The GAS script calls MailApp.sendEmail() using your Gmail account.
-     * Uses mode: 'no-cors' because GAS doesn't send CORS headers.
+     * Uses mode: 'cors' — the GAS script must include CORS headers (see setup guide).
+     * Reads the actual JSON response so failures are visible in the console.
      */
     async function sendViaGAS(to, subject, message, name) {
         if (!CFG.gasUrl || CFG.gasUrl.indexOf('YOUR_SCRIPT_ID') !== -1) {
@@ -63,16 +64,33 @@
         var payload = { to, subject, message, name: name || '' };
         console.info('[EmailService] Sending via Google Apps Script →', to);
 
-        await fetch(CFG.gasUrl, {
-            method:  'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body:    JSON.stringify(payload),
-            mode:    'no-cors',
-        });
+        var controller = new AbortController();
+        var timeoutId = setTimeout(function () { controller.abort(); }, 15000);
 
-        // no-cors gives an opaque response — treat any response as success
-        console.info('[EmailService] GAS request completed (check GAS execution log for details).');
-        return { success: true, relay: 'GAS' };
+        try {
+            var response = await fetch(CFG.gasUrl, {
+                method:  'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body:    JSON.stringify(payload),
+                mode:    'cors',
+                signal:  controller.signal,
+            });
+            clearTimeout(timeoutId);
+
+            var data = {};
+            try { data = await response.json(); } catch (_) {}
+
+            if (data.success) {
+                console.info('[EmailService] GAS sent successfully →', to);
+                return { success: true, relay: 'GAS' };
+            } else {
+                throw new Error(data.error || 'GAS returned failure (HTTP ' + response.status + ')');
+            }
+        } catch (err) {
+            clearTimeout(timeoutId);
+            console.error('[EmailService] GAS error:', err.message);
+            throw err;
+        }
     }
 
     // ── Local email server relay ────────────────────────────────────────────────

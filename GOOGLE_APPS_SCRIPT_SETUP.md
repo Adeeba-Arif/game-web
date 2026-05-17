@@ -13,11 +13,15 @@ with zero third-party dependencies.
 
 ## One-Time Setup (5 minutes)
 
-### Step 1 — Create the Apps Script
+### Step 1 — Open Your Existing Script (or Create a New One)
 
-1. Go to **https://script.google.com/**
-2. Click **New project**
-3. Delete the default `myFunction` code and paste this:
+If you already have a script deployed:
+
+1. Go to **https://script.google.com/** and open your existing project
+2. **Delete the old code** and paste the new CORS-enabled version below
+3. Click **💾 Save**
+
+If you don't have a script yet, click **New project** and paste this:
 
 ```javascript
 function doPost(e) {
@@ -30,8 +34,7 @@ function doPost(e) {
     var name    = data.name    || '';
 
     if (!to) {
-      return ContentService.createTextOutput(JSON.stringify({ success: false, error: 'Missing to' }))
-        .setMimeType(ContentService.MimeType.JSON);
+      return jsonResponse({ success: false, error: 'Missing "to" field.' });
     }
 
     MailApp.sendEmail({
@@ -41,14 +44,42 @@ function doPost(e) {
       name:    name,
     });
 
-    return ContentService.createTextOutput(JSON.stringify({ success: true }))
-      .setMimeType(ContentService.MimeType.JSON);
+    return jsonResponse({ success: true });
   } catch (err) {
-    return ContentService.createTextOutput(JSON.stringify({ success: false, error: err.toString() }))
-      .setMimeType(ContentService.MimeType.JSON);
+    return jsonResponse({ success: false, error: err.toString() });
   }
 }
+
+/**
+ * Build a JSON response with CORS headers so browsers can read it.
+ */
+function jsonResponse(obj) {
+  return ContentService.createTextOutput(JSON.stringify(obj))
+    .setMimeType(ContentService.MimeType.JSON)
+    .setHeaders({
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type',
+    });
+}
+
+/**
+ * Handle CORS preflight requests from browsers.
+ */
+function doOptions(e) {
+  return ContentService.createTextOutput('')
+    .setHeaders({
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Max-Age': '3600',
+    });
+}
 ```
+
+> **Why the CORS version?** The old script used `no-cors` mode which hides all errors.
+> The new version sends CORS headers so the browser can read the actual response
+> and show you exactly what went wrong in the console.
 
 4. Click **💾 Save** and name it **"The Dark World Email Relay"**
 
