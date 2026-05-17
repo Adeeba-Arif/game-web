@@ -222,6 +222,10 @@ async function fetchUserData(uid) {
         
         if (userDoc.exists) {
             userData = userDoc.data();
+            // Update nav username from Firestore data
+            if (userData.username && elements.navUserName) {
+                elements.navUserName.textContent = userData.username;
+            }
         } else {
             // Create new user document
             userData = {
@@ -610,9 +614,16 @@ async function handleLogin(e) {
 async function handleRegister(e) {
     e.preventDefault();
     
+    const username = document.getElementById('regUsername').value.trim();
     const email = document.getElementById('regEmail').value;
     const password = document.getElementById('regPassword').value;
     const confirmPassword = document.getElementById('regConfirmPassword').value;
+    
+    // Validate username
+    if (!username) {
+        showToast('Please enter a username!', 'error');
+        return;
+    }
     
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -634,12 +645,12 @@ async function handleRegister(e) {
     
     if (DEMO_MODE) {
         // Demo mode - simulate registration
-        handleDemoRegister(email);
+        handleDemoRegister(email, username);
         return;
     }
     
     try {
-        console.log('Starting registration with:', email);
+        console.log('Starting registration with:', email, 'username:', username);
         console.log('Auth object:', auth);
         console.log('DB object:', db);
         
@@ -654,9 +665,14 @@ async function handleRegister(e) {
         const userCredential = await auth.createUserWithEmailAndPassword(email, password);
         console.log('User created:', userCredential.user);
         
+        // Set display name on Firebase user profile
+        await userCredential.user.updateProfile({ displayName: username });
+        console.log('Display name set to:', username);
+        
         // Create user document in Firestore
         if (db) {
             await db.collection('users').doc(userCredential.user.uid).set({
+                username: username,
                 email: email,
                 score: 0,
                 level: 1,
@@ -760,11 +776,13 @@ async function handleLogout() {
 // DEMO MODE HANDLERS
 // ========================================
 function handleDemoLogin(email) {
-    currentUser = { uid: 'demo-user', email: email || 'demo@survivor.com' };
+    const displayName = (email || 'demo@survivor.com').split('@')[0];
+    currentUser = { uid: 'demo-user', email: email || 'demo@survivor.com', displayName: displayName };
 
     if (elements.loginBtn)    elements.loginBtn.classList.add('hidden');
     if (elements.logoutBtn)   elements.logoutBtn.classList.remove('hidden');
     if (elements.userInfoMini) elements.userInfoMini.style.display = 'flex';
+    if (elements.navUserName) elements.navUserName.textContent = displayName;
     
     // Set demo user data
     userData = {
@@ -787,12 +805,15 @@ function handleDemoLogin(email) {
     }, 1500);
 }
 
-function handleDemoRegister(email) {
-    currentUser = { uid: 'demo-user-' + Date.now(), email: email };
+function handleDemoRegister(email, username) {
+    currentUser = { uid: 'demo-user-' + Date.now(), email: email, displayName: username || email.split('@')[0] };
 
     if (elements.loginBtn)    elements.loginBtn.classList.add('hidden');
     if (elements.logoutBtn)   elements.logoutBtn.classList.remove('hidden');
     if (elements.userInfoMini) elements.userInfoMini.style.display = 'flex';
+
+    // Update nav username
+    if (elements.navUserName) elements.navUserName.textContent = currentUser.displayName;
 
     // Set demo user data
     userData = {
