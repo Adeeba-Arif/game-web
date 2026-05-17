@@ -72,7 +72,7 @@
 
         // no-cors gives an opaque response — treat any response as success
         console.info('[EmailService] GAS request completed (check GAS execution log for details).');
-        return { success: true };
+        return { success: true, relay: 'GAS' };
     }
 
     // ── Local email server relay ────────────────────────────────────────────────
@@ -98,7 +98,7 @@
 
             if (data.success) {
                 console.info('[EmailService] Sent via local server →', to);
-                return { success: true };
+                return { success: true, relay: 'local-server' };
             } else {
                 throw new Error(data.error || 'Server error');
             }
@@ -114,36 +114,45 @@
     /**
      * Try Google Apps Script first (public URL, works from any browser),
      * then local Nodemailer server (dev/testing), then mailto: fallback.
+     * Each step logs exactly what happened so failures are visible in the console.
      */
     async function sendEmail(to, subject, message, name) {
         // 1️⃣ Try Google Apps Script (works from any browser — primary for production)
         if (CFG.gasUrl && CFG.gasUrl.indexOf('YOUR_SCRIPT_ID') === -1) {
             try {
-                return await sendViaGAS(to, subject, message, name);
+                console.info('[EmailService] Relay 1/3 → GAS →', to);
+                var gasResult = await sendViaGAS(to, subject, message, name);
+                console.info('[EmailService] Relay 1/3 → GAS → success:', to);
+                return gasResult;
             } catch (err) {
-                console.warn('[EmailService] GAS failed, trying local server…', err.message);
+                console.warn('[EmailService] Relay 1/3 → GAS FAILED:', err.message, '→ trying local server…');
             }
+        } else {
+            console.info('[EmailService] Relay 1/3 → GAS skipped (URL not set or placeholder)');
         }
 
         // 2️⃣ Try local Nodemailer server (dev/testing only — localhost is not reachable from other machines)
         try {
-            return await sendViaServer(to, subject, message, name);
+            console.info('[EmailService] Relay 2/3 → Local server →', to);
+            var serverResult = await sendViaServer(to, subject, message, name);
+            console.info('[EmailService] Relay 2/3 → Local server → success:', to);
+            return serverResult;
         } catch (err) {
-            console.warn('[EmailService] Local server failed, falling back to mailto:…', err.message);
+            console.warn('[EmailService] Relay 2/3 → Local server FAILED:', err.message, '→ falling back to mailto:…');
         }
 
-        // 3️⃣ Fall back to mailto:
+        // 3️⃣ Fall back to mailto: (opens user's email client — NOT a real send)
+        console.warn('[EmailService] Relay 3/3 → mailto: fallback (no real email sent) →', to);
         var mailto = 'mailto:' + encode(to) +
             '?subject=' + encode(subject) +
             '&body=' + encode(message);
-        console.info('[EmailService] Fallback mailto →', to);
         var a = document.createElement('a');
         a.href = mailto;
         a.style.display = 'none';
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
-        return { success: true, fallback: true };
+        return { success: false, fallback: true, error: 'No email relay available. mailto: fallback opened — no email was sent.' };
     }
 
     // ── Public API ─────────────────────────────────────────────────────────────
@@ -240,8 +249,14 @@
             var adminResult  = await adminPromise;
 
             console.info('[EmailService] ── Results ──');
-            console.info('[EmailService]   User confirmation  :', userResult.success  ? 'SENT'  : 'FAILED →', userResult.success  ? '' : userResult.error);
-            console.info('[EmailService]   Admin notification :', adminResult.success ? 'SENT'  : 'FAILED →', adminResult.success ? '' : adminResult.error);
+            console.info('[EmailService]   User confirmation  :',
+                userResult.success ? 'SENT'  : 'FAILED →',
+                userResult.success  ? '' : userResult.error,
+                '| relay:', userResult.relay || '?');
+            console.info('[EmailService]   Admin notification :',
+                adminResult.success ? 'SENT' : 'FAILED →',
+                adminResult.success ? '' : adminResult.error,
+                '| relay:', adminResult.relay || '?');
 
             if (userResult.success && adminResult.success) {
                 console.info('[EmailService] Both emails sent.');
@@ -267,9 +282,9 @@
 
             var result = await sendEmail(to, subject, body, 'Test User');
             if (result.success) {
-                console.info('[EmailService] Test email sent to:', to);
+                console.info('[EmailService] Test email sent to:', to, '| relay:', result.relay || '?');
             } else {
-                console.error('[EmailService] Test email FAILED:', result.error);
+                console.error('[EmailService] Test email FAILED:', result.error, '| relay:', result.relay || '?');
             }
             return result;
         },

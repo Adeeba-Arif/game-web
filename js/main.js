@@ -1022,11 +1022,13 @@ async function sendRegistrationEmail(userEmail, username, timestamp) {
 
         // ── User confirmation result ──────────────────────────────────────────
         if (results.user.success) {
-            console.info('[sendRegistrationEmail] User confirmation email sent to:', userEmail);
+            console.info('[sendRegistrationEmail] User confirmation email sent to:', userEmail,
+                '| relay:', results.user.relay || '?');
         } else {
             console.error(
                 '[sendRegistrationEmail] Failed to send user confirmation:',
-                results.user.error
+                results.user.error,
+                '| relay:', results.user.relay || '?'
             );
         }
 
@@ -1034,12 +1036,14 @@ async function sendRegistrationEmail(userEmail, username, timestamp) {
         if (results.admin.success) {
             console.info(
                 '[sendRegistrationEmail] Admin notification sent to:',
-                window.env?.VITE_ADMIN_EMAIL || 'thedarkworld.8304@gmail.com'
+                window.env?.VITE_ADMIN_EMAIL || 'thedarkworld.8304@gmail.com',
+                '| relay:', results.admin.relay || '?'
             );
         } else {
             console.error(
                 '[sendRegistrationEmail] Failed to send admin notification:',
-                results.admin.error
+                results.admin.error,
+                '| relay:', results.admin.relay || '?'
             );
         }
 
@@ -1047,9 +1051,9 @@ async function sendRegistrationEmail(userEmail, username, timestamp) {
         if (results.user.success && results.admin.success) {
             showToast('Registration successful! Confirmation emails sent.', 'success');
         } else if (results.user.success) {
-            showToast('Registration successful! Confirmation email sent.', 'success');
+            showToast('Registration successful! Your confirmation email was sent.', 'success');
         } else if (results.admin.success) {
-            showToast('Registration successful! Admin notified.', 'success');
+            showToast('Registration successful! Admin has been notified.', 'success');
         } else {
             showToast('Registration saved, but email delivery failed. Please contact support.', 'error');
         }
