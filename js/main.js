@@ -13,6 +13,7 @@ let auth = null;
 let db = null;
 let currentUser = null;
 let userData = null;
+let firebaseInitialized = false;
 
 // Demo mode flag - set to false to use Firebase
 const DEMO_MODE = false;
@@ -34,6 +35,10 @@ const elements = {
     // Auth
     loginBtn: document.getElementById('loginBtn'),
     logoutBtn: document.getElementById('logoutBtn'),
+    registerBtn: document.getElementById('registerBtn'),
+    navJoinBtn: document.getElementById('navJoinBtn'),
+    mobileJoinBtn: document.getElementById('mobileJoinBtn'),
+    navTrophyBtn: document.getElementById('navTrophyBtn'),
     loginModal: document.getElementById('loginModal'),
     registerModal: document.getElementById('registerModal'),
     loginForm: document.getElementById('loginForm'),
@@ -115,13 +120,23 @@ function initializeFirebase() {
             return;
         }
         
-        // Initialize Firebase
-        firebaseApp = firebase.initializeApp(firebaseConfig);
+        // Check if Firebase is already initialized
+        if (!firebase.apps || !firebase.apps.length) {
+            // Initialize Firebase
+            firebaseApp = firebase.initializeApp(firebaseConfig);
+        } else {
+            // Use existing app
+            firebaseApp = firebase.app();
+        }
+        
         auth = firebase.auth();
         db = firebase.firestore();
         
-        // Listen for auth state changes
-        auth.onAuthStateChanged(handleAuthStateChange);
+        // Only set up auth state listener once
+        if (!firebaseInitialized) {
+            auth.onAuthStateChanged(handleAuthStateChange);
+            firebaseInitialized = true;
+        }
         
         console.log('Firebase initialized! Auth:', auth);
     } catch (error) {
@@ -137,13 +152,26 @@ function handleAuthStateChange(user) {
     
     if (user) {
         // User is logged in
-        elements.loginBtn.classList.add('hidden');
-        elements.logoutBtn.classList.remove('hidden');
-        elements.userInfoMini.style.display = 'flex';
+        if (elements.loginBtn) elements.loginBtn.classList.add('hidden');
+        if (elements.logoutBtn) elements.logoutBtn.classList.remove('hidden');
+        if (elements.registerBtn) elements.registerBtn.classList.add('hidden');
+        if (elements.userInfoMini) elements.userInfoMini.style.display = 'flex';
+        
+        // Hide Join buttons when user is logged in
+        if (elements.navJoinBtn) {
+            elements.navJoinBtn.parentElement.classList.add('hidden');
+        }
+        if (elements.mobileJoinBtn) {
+            elements.mobileJoinBtn.parentElement.classList.add('hidden');
+        }
+        // Hide trophy button when user is logged in
+        if (elements.navTrophyBtn) {
+            elements.navTrophyBtn.parentElement.classList.add('hidden');
+        }
         
         // Update UI with user info
         const displayName = user.displayName || user.email.split('@')[0];
-        elements.userName.textContent = displayName;
+        if (elements.userName) elements.userName.textContent = displayName;
         
         // Fetch user data from Firestore
         fetchUserData(user.uid);
@@ -151,10 +179,23 @@ function handleAuthStateChange(user) {
         showToast('Welcome back, survivor!', 'success');
     } else {
         // User is logged out
-        elements.loginBtn.classList.remove('hidden');
-        elements.logoutBtn.classList.add('hidden');
-        elements.userInfoMini.style.display = 'none';
-        elements.dashboard.classList.add('hidden');
+        if (elements.loginBtn) elements.loginBtn.classList.remove('hidden');
+        if (elements.logoutBtn) elements.logoutBtn.classList.add('hidden');
+        if (elements.registerBtn) elements.registerBtn.classList.remove('hidden');
+        if (elements.userInfoMini) elements.userInfoMini.style.display = 'none';
+        if (elements.dashboard) elements.dashboard.classList.add('hidden');
+        
+        // Show Join buttons when user is logged out
+        if (elements.navJoinBtn) {
+            elements.navJoinBtn.parentElement.classList.remove('hidden');
+        }
+        if (elements.mobileJoinBtn) {
+            elements.mobileJoinBtn.parentElement.classList.remove('hidden');
+        }
+        // Show trophy button when user is logged out
+        if (elements.navTrophyBtn) {
+            elements.navTrophyBtn.parentElement.classList.remove('hidden');
+        }
     }
 }
 
@@ -456,6 +497,13 @@ function initAuth() {
         elements.registerForm.addEventListener('submit', handleRegister);
     }
     
+    // Register button in navbar (if exists)
+    if (elements.registerBtn) {
+        elements.registerBtn.addEventListener('click', () => {
+            openModal(elements.registerModal);
+        });
+    }
+    
     // Google auth
     if (elements.googleAuth) {
         elements.googleAuth.addEventListener('click', handleGoogleAuth);
@@ -466,6 +514,15 @@ function initAuth() {
         elements.showRegister.addEventListener('click', () => {
             closeModal(elements.loginModal);
             openModal(elements.registerModal);
+        });
+    }
+    
+    // Show login from register modal
+    const showLoginFromRegister = document.getElementById('showLoginFromRegister');
+    if (showLoginFromRegister) {
+        showLoginFromRegister.addEventListener('click', () => {
+            closeModal(elements.registerModal);
+            openModal(elements.loginModal);
         });
     }
     
@@ -497,7 +554,6 @@ async function handleLogin(e) {
     e.preventDefault();
     
     const email = document.getElementById('loginEmail').value;
-    const whatsapp = document.getElementById('loginWhatsapp') ? document.getElementById('loginWhatsapp').value : '';
     const password = document.getElementById('loginPassword').value;
     
     if (DEMO_MODE) {
@@ -532,6 +588,18 @@ async function handleLogin(e) {
         elements.loginForm.reset();
         
         showToast('Login successful!', 'success');
+        
+        // Send login notification to admin
+        if (typeof window.EmailService !== 'undefined') {
+            window.EmailService.sendLoginNotification(email).catch(err => {
+                console.error('Failed to send login notification:', err);
+            });
+        }
+        
+        // Redirect to home page after short delay
+        setTimeout(() => {
+            window.location.href = 'index.html';
+        }, 1500);
     } catch (error) {
         console.error('Login error:', error);
         showToast(getAuthErrorMessage(error.code), 'error');
@@ -542,15 +610,8 @@ async function handleRegister(e) {
     e.preventDefault();
     
     const email = document.getElementById('regEmail').value;
-    const whatsapp = document.getElementById('regWhatsapp').value;
     const password = document.getElementById('regPassword').value;
     const confirmPassword = document.getElementById('regConfirmPassword').value;
-    
-    // Validate WhatsApp number
-    if (!whatsapp || whatsapp.trim() === '') {
-        showToast('Please enter your WhatsApp number!', 'error');
-        return;
-    }
     
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -572,12 +633,12 @@ async function handleRegister(e) {
     
     if (DEMO_MODE) {
         // Demo mode - simulate registration
-        handleDemoRegister(email, whatsapp);
+        handleDemoRegister(email);
         return;
     }
     
     try {
-        console.log('Starting registration with:', email, whatsapp);
+        console.log('Starting registration with:', email);
         console.log('Auth object:', auth);
         console.log('DB object:', db);
         
@@ -596,7 +657,6 @@ async function handleRegister(e) {
         if (db) {
             await db.collection('users').doc(userCredential.user.uid).set({
                 email: email,
-                whatsapp: whatsapp,
                 score: 0,
                 level: 1,
                 kills: 0,
@@ -607,28 +667,32 @@ async function handleRegister(e) {
             console.log('User document created in Firestore');
         }
         
-        // Send email notification (simulated - in production use a backend service)
-        await sendRegistrationEmail(email, whatsapp);
-        console.log('Registration email sent');
-        
+        // Send email notifications to admin and user
+        // NOTE: do NOT redirect until this finishes – the browser cancels
+        // pending fetch() calls on navigation.
+        try {
+            await sendRegistrationEmail(email);
+        } catch (emailErr) {
+            console.error('Email sending failed (non-fatal):', emailErr);
+        }
+
         // Show success message
         showToast('Registered successfully!', 'success');
-        
+
         // Close modal and redirect to home
         closeModal(elements.registerModal);
         elements.registerForm.reset();
-        
+
         // Redirect to home page after short delay
         setTimeout(() => {
-            window.location.href = '../index.html';
-        }, 1500);
+            window.location.href = 'index.html';
+        }, 2000);
     } catch (error) {
-        console.error('Registration error:', error);
-        console.error('Error code:', error.code);
-        console.error('Error message:', error.message);
-        alert('Registration Error: ' + error.message);
-        showToast(getAuthErrorMessage(error.code), 'error');
-    }
+       console.error('Registration error:', error);
+       console.error('Error code:', error.code);
+       console.error('Error message:', error.message);
+       showToast(getAuthErrorMessage(error.code), 'error');
+   }
 }
 
 async function handleGoogleAuth() {
@@ -652,6 +716,11 @@ async function handleGoogleAuth() {
         closeModal(elements.loginModal);
         
         showToast('Google sign-in successful!', 'success');
+        
+        // Redirect to home page after short delay
+        setTimeout(() => {
+            window.location.href = 'index.html';
+        }, 1500);
     } catch (error) {
         console.error('Google auth error:', error);
         showToast(getAuthErrorMessage(error.code), 'error');
@@ -662,10 +731,10 @@ async function handleLogout() {
     if (DEMO_MODE) {
         currentUser = null;
         userData = null;
-        elements.loginBtn.classList.remove('hidden');
-        elements.logoutBtn.classList.add('hidden');
-        elements.userInfoMini.style.display = 'none';
-        elements.dashboard.classList.add('hidden');
+        if (elements.loginBtn)   elements.loginBtn.classList.remove('hidden');
+        if (elements.logoutBtn)  elements.logoutBtn.classList.add('hidden');
+        if (elements.userInfoMini) elements.userInfoMini.style.display = 'none';
+        if (elements.dashboard)  elements.dashboard.classList.add('hidden');
         showToast('Logged out successfully', 'info');
         return;
     }
@@ -685,10 +754,10 @@ async function handleLogout() {
 // ========================================
 function handleDemoLogin(email) {
     currentUser = { uid: 'demo-user', email: email || 'demo@survivor.com' };
-    
-    elements.loginBtn.classList.add('hidden');
-    elements.logoutBtn.classList.remove('hidden');
-    elements.userInfoMini.style.display = 'flex';
+
+    if (elements.loginBtn)    elements.loginBtn.classList.add('hidden');
+    if (elements.logoutBtn)   elements.logoutBtn.classList.remove('hidden');
+    if (elements.userInfoMini) elements.userInfoMini.style.display = 'flex';
     
     // Set demo user data
     userData = {
@@ -704,15 +773,20 @@ function handleDemoLogin(email) {
     if (elements.loginForm) elements.loginForm.reset();
     
     showToast('Demo login successful!', 'success');
+    
+    // Redirect to home page after short delay
+    setTimeout(() => {
+        window.location.href = 'index.html';
+    }, 1500);
 }
 
-function handleDemoRegister(email, whatsapp) {
+function handleDemoRegister(email) {
     currentUser = { uid: 'demo-user-' + Date.now(), email: email };
-    
-    elements.loginBtn.classList.add('hidden');
-    elements.logoutBtn.classList.remove('hidden');
-    elements.userInfoMini.style.display = 'flex';
-    
+
+    if (elements.loginBtn)    elements.loginBtn.classList.add('hidden');
+    if (elements.logoutBtn)   elements.logoutBtn.classList.remove('hidden');
+    if (elements.userInfoMini) elements.userInfoMini.style.display = 'flex';
+
     // Set demo user data
     userData = {
         score: 0,
@@ -720,37 +794,37 @@ function handleDemoRegister(email, whatsapp) {
         kills: 0,
         playTime: 0
     };
-    
+
     updateUserUI();
-    
+
     closeModal(elements.registerModal);
     if (elements.registerForm) elements.registerForm.reset();
-    
+
     // Show success message
     showToast('Registered successfully!', 'success');
-    
+
     // Send email notification to official email
     const subject = encodeURIComponent('New Player Registration - The Dark World');
     const body = encodeURIComponent(
         `New Player Registration Details:\n\n` +
         `Email: ${email}\n` +
-        `WhatsApp: ${whatsapp}\n` +
+        `WhatsApp: N/A\n` +
         `Registration Date: ${new Date().toLocaleString()}\n\n` +
         `Please process this registration.`
     );
-    
+
     // Open email client with registration details
     window.open(`mailto:thedarkworld.8304@gmail.com?subject=${subject}&body=${body}`, '_blank');
-    
+
     // Redirect to home page after short delay
     setTimeout(() => {
-        window.location.href = '../index.html';
+        window.location.href = 'index.html';
     }, 1500);
-    
+
     // Log for demo purposes
     console.log('=== EMAIL NOTIFICATION SENT ===');
     console.log('To: thedarkworld.8304@gmail.com');
-    console.log(`New player: ${email}, WhatsApp: ${whatsapp}`);
+    console.log(`New player: ${email}`);
 }
 
 // ========================================
@@ -907,28 +981,87 @@ function getAuthErrorMessage(errorCode) {
 // ========================================
 // EMAIL NOTIFICATION & PAYMENT
 // ========================================
-async function sendRegistrationEmail(email, whatsapp) {
-    // In production, this would use a backend service like EmailJS, SendGrid, or Firebase Functions
-    // For now, we'll simulate the email sending and log it
-    
-    console.log('=== EMAIL NOTIFICATION ===');
-    console.log('To: thedarkworld.8304@gmail.com');
-    console.log('Subject: New Player Registration - The Dark World');
-    console.log('Body:');
-    console.log('===========================');
-    console.log('A new player has registered!');
-    console.log(`Player Email: ${email}`);
-    console.log(`WhatsApp Number: ${whatsapp}`);
-    console.log(`Registration Time: ${new Date().toISOString()}`);
-    console.log('===========================');
-    
-    // Simulate API call delay
-    await new Promise(resolve => setTimeout(resolve, 500));
-    
-    showToast('Admin notified of your registration!', 'success');
+
+/**
+ * Send registration emails via EmailService (Express + Nodemailer — silent automatic delivery).
+ *
+ * Two emails are dispatched in parallel:
+ *  1. User confirmation  – "You have successfully registered for The Dark World."
+ *  2. Admin notification – new user's username, email, and registration timestamp.
+ *
+ * Individual failures are caught and logged so one failed email
+ * does not block the other or crash the registration flow.
+ *
+ * @param {string}  userEmail   – the newly registered user's email address
+ * @param {string}  [username]  – display name / username (falls back to email)
+ * @param {Date|string|number} [timestamp] – registration time
+ * @returns {Promise<void>}
+ */
+async function sendRegistrationEmail(userEmail, username, timestamp) {
+    if (!userEmail) {
+        console.warn('[sendRegistrationEmail] No email address provided – skipping.');
+        return;
+    }
+
+    // Guard: EmailService may not be loaded
+    if (typeof window.EmailService === 'undefined') {
+        console.error(
+            '[sendRegistrationEmail] EmailService is not available. ' +
+            'Ensure js/email-service.js is loaded and the email server is running (node email-server.js).'
+        );
+        showToast('Email service unavailable – please contact support.', 'error');
+        return;
+    }
+
+    try {
+        const results = await window.EmailService.sendRegistrationEmails(
+            userEmail,
+            username || userEmail,
+            timestamp || Date.now()
+        );
+
+        // ── User confirmation result ──────────────────────────────────────────
+        if (results.user.success) {
+            console.info('[sendRegistrationEmail] User confirmation email sent to:', userEmail);
+        } else {
+            console.error(
+                '[sendRegistrationEmail] Failed to send user confirmation:',
+                results.user.error
+            );
+        }
+
+        // ── Admin notification result ─────────────────────────────────────────
+        if (results.admin.success) {
+            console.info(
+                '[sendRegistrationEmail] Admin notification sent to:',
+                window.env?.VITE_ADMIN_EMAIL || 'thedarkworld.8304@gmail.com'
+            );
+        } else {
+            console.error(
+                '[sendRegistrationEmail] Failed to send admin notification:',
+                results.admin.error
+            );
+        }
+
+        // ── User-facing feedback ──────────────────────────────────────────────
+        if (results.user.success && results.admin.success) {
+            showToast('Registration successful! Confirmation emails sent.', 'success');
+        } else if (results.user.success) {
+            showToast('Registration successful! Confirmation email sent.', 'success');
+        } else if (results.admin.success) {
+            showToast('Registration successful! Admin notified.', 'success');
+        } else {
+            showToast('Registration saved, but email delivery failed. Please contact support.', 'error');
+        }
+
+    } catch (err) {
+        // Catch-all for unexpected errors in the email pipeline
+        console.error('[sendRegistrationEmail] Unexpected error:', err);
+        showToast('Registration saved, but an email error occurred.', 'error');
+    }
 }
 
-function showPaymentInstructions(email, whatsapp) {
+function showPaymentInstructions(email) {
     // Create payment instruction modal if it doesn't exist
     let paymentModal = document.getElementById('paymentModal');
     
@@ -964,7 +1097,6 @@ function showPaymentInstructions(email, whatsapp) {
                         <div class="payment-user-info">
                             <p><strong>Your Registration Details:</strong></p>
                             <p><i class="fas fa-envelope"></i> Email: <span id="paymentEmail"></span></p>
-                            <p><i class="fab fa-whatsapp"></i> WhatsApp: <span id="paymentWhatsapp"></span></p>
                         </div>
                     </div>
                     <div class="payment-footer">
@@ -1003,7 +1135,6 @@ function showPaymentInstructions(email, whatsapp) {
     
     // Update user info in modal
     document.getElementById('paymentEmail').textContent = email;
-    document.getElementById('paymentWhatsapp').textContent = whatsapp;
     
     // Show the modal
     paymentModal.classList.add('active');
@@ -1012,11 +1143,17 @@ function showPaymentInstructions(email, whatsapp) {
 // ========================================
 // EXPORT FOR USE
 // ========================================
+// Expose auth, db, and showPaymentInstructions globally so other scripts (e.g. game.js)
+// can access them without relying on closure scope.
+window.auth = auth;
+window.db   = db;
+
 window.ZSurvival = {
     showToast,
     auth,
     db,
     currentUser,
     userData,
-    DEMO_MODE
+    DEMO_MODE,
+    showPaymentInstructions
 };

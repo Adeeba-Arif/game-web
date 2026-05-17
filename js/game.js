@@ -104,20 +104,11 @@ function setupEventListeners() {
             // Check if user is logged in via Firebase
             let isLoggedIn = false;
             let userEmail = '';
-            let userWhatsapp = '';
             
             if (typeof auth !== 'undefined' && auth.currentUser) {
                 isLoggedIn = true;
                 const user = auth.currentUser;
                 userEmail = user.email;
-                
-                // Fetch user data from Firestore
-                if (typeof db !== 'undefined') {
-                    try {
-                        const userDoc = await db.collection('users').doc(user.uid).get();
-                        if (userDoc.exists) {
-                            const userData = userDoc.data();
-                            userWhatsapp = userData.whatsapp || '';
                         }
                     } catch (e) {
                         console.log('Could not fetch user data:', e);
@@ -146,7 +137,7 @@ function setupEventListeners() {
             
             // Show payment instructions for logged in users
             if (typeof showPaymentInstructions === 'function') {
-                showPaymentInstructions(userEmail, userWhatsapp);
+                showPaymentInstructions(userEmail);
             }
             
             if (typeof showToast === 'function') {
@@ -219,7 +210,7 @@ function setupEventListeners() {
             
             // Show payment instructions modal
             if (typeof showPaymentInstructions === 'function') {
-                showPaymentInstructions(userEmail, userWhatsapp);
+                showPaymentInstructions(userEmail);
             } else {
                 // Fallback: hide mission brief and show game
                 missionBriefOverlay.classList.add('hidden');

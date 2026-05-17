@@ -28,6 +28,29 @@ document.addEventListener('DOMContentLoaded', function() {
     loadProfile();
     updateProfileUI();
     runPreloader();
+
+    // ── Test Email button ──────────────────────────────────────────────────────
+    var btnTestEmail = document.getElementById('btnTestEmail');
+    if (btnTestEmail) {
+        btnTestEmail.addEventListener('click', function () {
+            if (typeof window.EmailService === 'undefined') {
+                console.error('[Profile] EmailService is not available.');
+                alert('Email service is not loaded. Check the console for details.');
+                return;
+            }
+            btnTestEmail.disabled = true;
+            btnTestEmail.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending…';
+            window.EmailService.sendTestEmail().then(function (res) {
+                btnTestEmail.disabled = false;
+                btnTestEmail.innerHTML = '<i class="fas fa-paper-plane"></i> Test Email';
+                if (res.success) {
+                    alert('✅ Test email sent to ' + (window.EmailService.getStatus().config.adminEmail) + '\n\nCheck the console for full details.');
+                } else {
+                    alert('❌ Test email FAILED:\n' + res.error + '\n\nCheck the console for full details.');
+                }
+            });
+        });
+    }
 });
 
 function loadProfile() {

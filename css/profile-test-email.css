@@ -1,0 +1,33 @@
+/* ========================================
+   EMAIL TEST BUTTON  (dev only – remove in production)
+   ======================================== */
+.btn-test-email {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background: linear-gradient(135deg, #e63946, #9d0208);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(230, 57, 70, 0.5);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-test-email:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(230, 57, 70, 0.7);
+}
+.btn-test-email:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}

@@ -336,7 +336,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    padding: 12px 40px;
+    padding: 6px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -354,20 +354,20 @@ body {
 .logo-3d {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
 }
 
 .logo-icon {
-    font-size: 1.8rem;
+    font-size: 1.4rem;
     color: #ffffff;
     opacity: 0.9;
 }
 
 .logo-text {
     font-family: 'Bebas Neue', 'Oswald', sans-serif;
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     color: #ffffff;
-    letter-spacing: 4px;
+    letter-spacing: 2px;
     text-transform: uppercase;
     font-weight: 400;
 }
@@ -375,19 +375,19 @@ body {
 .nav-links {
     display: flex;
     list-style: none;
-    gap: 5px;
+    gap: 2px;
 }
 
 .nav-link {
     display: flex;
     align-items: center;
-    gap: 6px;
-    padding: 8px 16px;
+    gap: 4px;
+    padding: 4px 10px;
     color: rgba(255, 255, 255, 0.75);
     text-decoration: none;
     font-family: 'Bebas Neue', 'Oswald', sans-serif;
-    font-size: 0.95rem;
-    letter-spacing: 2px;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
     text-transform: uppercase;
     border-radius: 3px;
     transition: all 0.3s ease;
@@ -401,29 +401,25 @@ body {
 }
 
 .nav-icon {
-    font-size: 0.85rem;
-}
-
-.nav-icon {
-    font-size: 0.9rem;
+    font-size: 0.75rem;
 }
 
 .nav-auth {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
 }
 
 .user-info-mini {
     display: flex;
     align-items: center;
-    gap: 15px;
-    padding: 6px 12px;
+    gap: 10px;
+    padding: 4px 8px;
     background: rgba(196, 160, 89, 0.1);
     border: 1px solid rgba(196, 160, 89, 0.3);
     border-radius: 3px;
     font-family: 'Bebas Neue', 'Oswald', sans-serif;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     letter-spacing: 1px;
 }
 
@@ -436,13 +432,13 @@ body {
 }
 
 .btn-auth {
-    padding: 8px 18px;
+    padding: 5px 12px;
     background: transparent;
     border: 1px solid rgba(196, 160, 89, 0.5);
     color: #c4a059;
     font-family: 'Bebas Neue', 'Oswald', sans-serif;
-    font-size: 0.85rem;
-    letter-spacing: 2px;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
     cursor: pointer;
     transition: all 0.3s ease;
     text-transform: uppercase;
@@ -461,14 +457,14 @@ body {
 .hamburger {
     display: none;
     flex-direction: column;
-    gap: 5px;
+    gap: 3px;
     cursor: pointer;
-    padding: 10px;
+    padding: 6px;
 }
 
 .hamburger span {
-    width: 25px;
-    height: 2px;
+    width: 20px;
+    height: 1.5px;
     background: #c4a059;
     transition: all 0.3s ease;
 }
@@ -476,7 +472,7 @@ body {
 /* Mobile Menu */
 .mobile-menu {
     position: fixed;
-    top: 60px;
+    top: 40px;
     left: 0;
     width: 100%;
     background: rgba(15, 15, 20, 0.98);
@@ -495,7 +491,7 @@ body {
 
 .mobile-nav-links {
     list-style: none;
-    padding: 15px;
+    padding: 10px;
 }
 
 .mobile-nav-links li {
@@ -505,13 +501,13 @@ body {
 .mobile-nav-links a {
     display: flex;
     align-items: center;
-    gap: 15px;
-    padding: 14px;
+    gap: 10px;
+    padding: 10px;
     color: rgba(255, 255, 255, 0.8);
     text-decoration: none;
     font-family: 'Bebas Neue', 'Oswald', sans-serif;
-    font-size: 1rem;
-    letter-spacing: 2px;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
     text-transform: uppercase;
     transition: all 0.3s ease;
 }
@@ -562,9 +558,9 @@ body {
     width: 100%;
     height: 100%;
     background: linear-gradient(180deg, 
-        rgba(15, 15, 20, 0.85) 0%, 
-        rgba(15, 15, 20, 0.75) 50%,
-        rgba(15, 15, 20, 0.85) 100%
+        rgba(15, 15, 20, 0.9) 0%, 
+        rgba(15, 15, 20, 0.8) 50%,
+        rgba(15, 15, 20, 0.9) 100%
     );
 }
 
@@ -610,30 +606,102 @@ body {
     text-transform: uppercase;
 }
 
+/* Enhanced Website Name Display */
 .hero-title {
     margin-bottom: 30px;
     line-height: 1;
+    position: relative;
+    text-align: center;
 }
 
 .title-line {
     display: block;
     font-family: 'Bebas Neue', 'Oswald', sans-serif;
     font-size: clamp(4rem, 12vw, 9rem);
-    color: #ffffff;
     text-transform: uppercase;
     letter-spacing: 8px;
     line-height: 0.95;
     font-weight: 400;
+    position: relative;
+    text-shadow: 
+        0 0 10px rgba(255, 255, 255, 0.3),
+        0 0 20px rgba(255, 255, 255, 0.2),
+        0 0 30px rgba(255, 255, 255, 0.1);
+    animation: titleGlow 3s ease-in-out infinite alternate;
 }
 
 .title-line-1 {
     color: #ffffff;
     margin-bottom: 5px;
+    background: linear-gradient(90deg, #ffffff, #e0e0e0, #ffffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation-delay: 0s;
 }
 
 .title-line-2 {
     color: #c4a059;
     font-size: clamp(3rem, 10vw, 7rem);
+    background: linear-gradient(90deg, #c4a059, #d4b069, #c4a059);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation-delay: 0.5s;
+    text-shadow: 
+        0 0 10px rgba(196, 160, 89, 0.4),
+        0 0 20px rgba(196, 160, 89, 0.3),
+        0 0 30px rgba(196, 160, 89, 0.2);
+}
+
+@keyframes titleGlow {
+    0% {
+        text-shadow: 
+            0 0 10px rgba(255, 255, 255, 0.3),
+            0 0 20px rgba(255, 255, 255, 0.2),
+            0 0 30px rgba(255, 255, 255, 0.1);
+    }
+    100% {
+        text-shadow: 
+            0 0 15px rgba(255, 255, 255, 0.5),
+            0 0 30px rgba(255, 255, 255, 0.3),
+            0 0 45px rgba(255, 255, 255, 0.2);
+    }
+}
+
+/* Title Decoration Elements */
+.title-decoration {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #c4a059, transparent);
+    bottom: -20px;
+    left: 0;
+    opacity: 0.5;
+}
+
+.title-decoration::before {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #c4a059;
+    border-radius: 50%;
+    top: -4px;
+    left: 30%;
+    box-shadow: 0 0 10px #c4a059;
+}
+
+.title-decoration::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #c4a059;
+    border-radius: 50%;
+    top: -4px;
+    right: 30%;
+    box-shadow: 0 0 10px #c4a059;
 }
 
 .hero-subtitle {
@@ -655,56 +723,106 @@ body {
     margin-bottom: 60px;
 }
 
-/* Primary Button - Professional Style */
+/* Enhanced Hero Buttons */
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    margin-bottom: 60px;
+}
+
+/* Primary Button - Enhanced Style */
 .btn-primary {
     display: inline-flex;
     align-items: center;
     gap: 12px;
-    padding: 16px 40px;
-    background: #c4a059;
-    border: none;
+    padding: 18px 45px;
+    background: linear-gradient(135deg, #c4a059, #d4b069);
+    border: 2px solid #c4a059;
     color: #0f0f14;
     font-family: 'Bebas Neue', 'Oswald', sans-serif;
-    font-size: 1.15rem;
+    font-size: 1.2rem;
     font-weight: 400;
     letter-spacing: 3px;
     text-transform: uppercase;
     text-decoration: none;
     cursor: pointer;
     transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 
+        0 0 20px rgba(196, 160, 89, 0.4),
+        inset 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: 0.5s;
 }
 
 .btn-primary:hover {
-    background: #d4b069;
-    transform: translateY(-2px);
+    background: linear-gradient(135deg, #d4b069, #e4c079);
+    transform: translateY(-3px);
+    box-shadow: 
+        0 0 30px rgba(196, 160, 89, 0.6),
+        inset 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary:hover::before {
+    left: 100%;
 }
 
 .btn-icon {
     font-size: 1rem;
 }
 
-/* Secondary Button */
+/* Secondary Button - Enhanced Style */
 .btn-secondary {
     display: inline-flex;
     align-items: center;
     gap: 12px;
-    padding: 16px 40px;
+    padding: 18px 45px;
     background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.4);
     color: #ffffff;
     font-family: 'Bebas Neue', 'Oswald', sans-serif;
-    font-size: 1.15rem;
+    font-size: 1.2rem;
     font-weight: 400;
     letter-spacing: 3px;
     text-transform: uppercase;
     text-decoration: none;
     cursor: pointer;
     transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-secondary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: 0.5s;
 }
 
 .btn-secondary:hover {
-    border-color: #c4a059;
-    color: #c4a059;
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: translateY(-3px);
+}
+
+.btn-secondary:hover::before {
+    left: 100%;
 }
 
 /* Hero Stats */
@@ -1708,26 +1826,28 @@ body {
     background: var(--bg-dark);
     border: 1px solid var(--primary-red);
     border-radius: 10px;
-    padding: 40px;
-    max-width: 450px;
+    padding: 25px;
+    max-width: 400px;
     width: 90%;
     position: relative;
     box-shadow: 
         0 0 50px rgba(230, 57, 70, 0.3),
         inset 0 0 50px rgba(0, 0, 0, 0.5);
     animation: modalSlideIn 0.3s ease-out;
+    max-height: 90vh;
+    overflow-y: auto;
 }
 
 @keyframes modalSlideIn {
-    0% { transform: translateY(-50px); opacity: 0; }
+    0% { transform: translateY(-30px); opacity: 0; }
     100% { transform: translateY(0); opacity: 1; }
 }
 
 .modal-close {
     position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 1.5rem;
+    top: 10px;
+    right: 15px;
+    font-size: 1.3rem;
     color: var(--text-muted);
     cursor: pointer;
     transition: color var(--transition-fast);
@@ -1739,34 +1859,34 @@ body {
 
 .modal-header {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .modal-header i {
-    font-size: 3rem;
+    font-size: 2.5rem;
     color: var(--primary-red);
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     display: block;
 }
 
 .modal-header h3 {
     font-family: var(--font-display);
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     color: var(--text-white);
-    letter-spacing: 3px;
+    letter-spacing: 2px;
 }
 
 /* Form Styles */
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .form-group label {
     display: block;
     font-family: var(--font-heading);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: var(--text-light);
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
@@ -1777,22 +1897,22 @@ body {
 
 .input-wrapper i {
     position: absolute;
-    left: 15px;
+    left: 12px;
     top: 50%;
     transform: translateY(-50%);
     color: var(--text-muted);
-    font-size: 1rem;
+    font-size: 0.9rem;
 }
 
 .input-wrapper input {
     width: 100%;
-    padding: 15px 15px 15px 45px;
+    padding: 12px 12px 12px 40px;
     background: rgba(0, 0, 0, 0.5);
     border: 1px solid var(--metal-light);
     border-radius: 5px;
     color: var(--text-white);
     font-family: var(--font-body);
-    font-size: 1rem;
+    font-size: 0.9rem;
     transition: all var(--transition-fast);
 }
 
@@ -1809,19 +1929,19 @@ body {
 .btn-login,
 .btn-register {
     width: 100%;
-    padding: 15px;
+    padding: 12px;
     background: var(--gradient-blood);
     border: none;
     border-radius: 5px;
     color: var(--text-white);
     font-family: var(--font-heading);
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 600;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     text-transform: uppercase;
     cursor: pointer;
     transition: all var(--transition-fast);
-    margin-top: 10px;
+    margin-top: 8px;
 }
 
 .btn-login:hover,
@@ -1832,7 +1952,7 @@ body {
 
 .auth-divider {
     text-align: center;
-    margin: 25px 0;
+    margin: 15px 0;
     position: relative;
 }
 
@@ -1848,28 +1968,28 @@ body {
 
 .auth-divider span {
     background: var(--bg-dark);
-    padding: 0 15px;
+    padding: 0 12px;
     color: var(--text-muted);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     position: relative;
 }
 
 .btn-google {
     width: 100%;
-    padding: 15px;
+    padding: 12px;
     background: var(--metal-dark);
     border: 1px solid var(--metal-light);
     border-radius: 5px;
     color: var(--text-white);
     font-family: var(--font-heading);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 8px;
     cursor: pointer;
     transition: all var(--transition-fast);
-    margin-bottom: 15px;
+    margin-bottom: 12px;
 }
 
 .btn-google:hover {
@@ -1879,13 +1999,13 @@ body {
 
 .btn-register-switch {
     width: 100%;
-    padding: 15px;
+    padding: 12px;
     background: transparent;
     border: 1px solid var(--primary-red);
     border-radius: 5px;
     color: var(--primary-red);
     font-family: var(--font-heading);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     cursor: pointer;
     transition: all var(--transition-fast);
 }
@@ -1895,9 +2015,28 @@ body {
     color: var(--text-white);
 }
 
+/* Login Switch Button in Register Modal */
+.btn-login-switch {
+    width: 100%;
+    padding: 12px;
+    background: transparent;
+    border: 1px solid var(--primary-red);
+    border-radius: 5px;
+    color: var(--primary-red);
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.btn-login-switch:hover {
+    background: var(--primary-red);
+    color: var(--text-white);
+}
+
 /* ========================================
-   DASHBOARD PANEL
-   ======================================== */
+    DASHBOARD PANEL
+    ======================================== */
 .dashboard-panel {
     position: fixed;
     top: 80px;
@@ -2482,15 +2621,15 @@ body {
 
 @media (max-width: 768px) {
     .navbar {
-        padding: 12px 20px;
+        padding: 4px 15px;
     }
     
     .logo-text {
-        font-size: 1.3rem;
+        font-size: 1rem;
     }
     
     .logo-icon {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
     }
     
     .user-info-mini {
@@ -2498,16 +2637,16 @@ body {
     }
     
     .nav-auth {
-        gap: 10px;
+        gap: 8px;
     }
     
     .btn-auth {
-        padding: 6px 12px;
-        font-size: 0.75rem;
+        padding: 4px 10px;
+        font-size: 0.7rem;
     }
     
     .hero-section {
-        padding: 80px 20px 50px;
+        padding: 50px 20px 40px;
     }
     
     .title-line {

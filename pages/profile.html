@@ -6,6 +6,7 @@
     <title>Player Profile - The Dark World</title>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/profile.css">
+    <link rel="stylesheet" href="../css/profile-test-email.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -317,6 +318,11 @@
         </div>
     </main>
 
+    <!-- Email Test Button (dev only – remove in production) -->
+    <button id="btnTestEmail" class="btn-test-email" title="Send a test email to the admin">
+        <i class="fas fa-paper-plane"></i> Test Email
+    </button>
+
     <!-- Login Modal -->
     <div id="loginModal" class="modal">
         <div class="modal-content">
@@ -348,23 +354,80 @@
                 <span>or continue with</span>
             </div>
             <button id="googleAuth" class="btn-google">
-                <i class="fab fa-google"></i>
-                <span>Sign in with Google</span>
-            </button>
-        </div>
-    </div>
-
-    <!-- Toast Notifications -->
+                                 <i class="fab fa-google"></i>
+                                 <span>Sign in with Google</span>
+                             </button>
+                             <div class="auth-divider">
+                                 <span>new survivor?</span>
+                             </div>
+                             <button id="showRegister" class="btn-register-switch">
+                                 <span><i class="fas fa-user-plus"></i> CREATE ACCOUNT</span>
+                             </button>
+                         </div>
+                     </div>
+     
+                     <!-- Register Modal -->
+                     <div id="registerModal" class="modal">
+                         <div class="modal-content">
+                             <span class="modal-close register-close">&times;</span>
+                             <div class="modal-header">
+                                 <i class="fas fa-user-plus"></i>
+                                 <h3>JOIN THE RESISTANCE</h3>
+                             </div>
+                             <form id="registerForm" class="register-form">
+                                  <div class="form-group">
+                                      <label for="regEmail">Email Address</label>
+                                      <div class="input-wrapper">
+                                          <i class="fas fa-envelope"></i>
+                                          <input type="email" id="regEmail" name="regEmail" placeholder="survivor@email.com" required>
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
+                                      <label for="regPassword">Password</label>
+                                      <div class="input-wrapper">
+                                          <i class="fas fa-lock"></i>
+                                          <input type="password" id="regPassword" name="regPassword" placeholder="Create password" required>
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
+                                      <label for="regConfirmPassword">Confirm Password</label>
+                                      <div class="input-wrapper">
+                                          <i class="fas fa-lock"></i>
+                                          <input type="password" id="regConfirmPassword" name="regConfirmPassword" placeholder="Confirm password" required>
+                                      </div>
+                                  </div>
+                                  <button type="submit" class="btn-register">
+                                      <span><i class="fas fa-user-plus"></i> REGISTER</span>
+                                  </button>
+                              </form>
+                             <div class="auth-divider">
+                                 <span>Already have an account?</span>
+                             </div>
+                             <button id="showLoginFromRegister" class="btn-login-switch">
+                                 <span><i class="fas fa-sign-in-alt"></i> LOGIN NOW</span>
+                             </button>
+                         </div>
+                     </div>
+     
+                     <!-- Toast Notifications -->
     <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Test Email Button (dev only – remove in production) -->
+    <button id="btnTestEmail" class="btn-test-email">
+        <i class="fas fa-paper-plane"></i> Test Email
+    </button>
 
     <!-- Scripts -->
     <script src="../assets-config.js"></script>
     <script src="../env.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
     <script src="../firebase-config.js"></script>
+
+    <!-- Email Service Module (Express + Nodemailer — silent automatic delivery) -->
+    <script src="../js/email-service.js"></script>
+
     <script src="../js/main.js"></script>
     <script src="../js/profile.js"></script>
 </body>

@@ -6,20 +6,30 @@ const AssetsConfig = {
     // Background image settings
     background: {
         main: 'WhatsApp Image 2026-03-05 at 5.22.49 AM (1).jpeg',
+        alternatives: {
+            dark: 'WhatsApp Image 2026-03-05 at 5.22.49 AM (1).jpeg',
+            forest: 'WhatsApp Image 2026-03-05 at 5.22.49 AM.jpeg',
+            mystical: 'WhatsApp Image 2026-03-05 at 5.22.48 AM (1).jpeg',
+        },
     },
-    
+
+    // Character / player image
+    character: {
+        image: 'WhatsApp Image 2026-03-05 at 5.22.48 AM.jpeg',
+    },
+
     // Sword image
     sword: {
         image: 'WhatsApp Image 2026-03-05 at 5.22.49 AM (2).jpeg',
         glowColor: 'rgba(139, 92, 246, 0.8)'
     },
-    
+
     // Author images
     authors: {
         waleed: 'assets/authors/Waleed Manzoor.png',
         adeeba: 'assets/authors/Adeeba Arif.jpeg'
     },
-    
+
     animations: {
         swordFloat: true,
         swordGlow: true

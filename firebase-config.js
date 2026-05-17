@@ -1,7 +1,4 @@
-// ========================================
-// FIREBASE CONFIGURATION
-// ========================================
-// Using environment variables from env.js
+
 
 const firebaseConfig = {
     apiKey: window.env?.VITE_FIREBASE_API_KEY || "AIzaSyCejCxYF9ter8nzermqwtqDdB_Sa3jMobs",

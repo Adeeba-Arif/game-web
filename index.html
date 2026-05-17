@@ -56,57 +56,55 @@
     <!-- 3D Background Canvas -->
     <canvas id="bgCanvas"></canvas>
 
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="logo">
-            <div class="logo-3d">
-                <span class="logo-icon"><i class="fas fa-skull-crossbones"></i></span>
-                <span class="logo-text">The Dark World</span>
+     <!-- Navigation -->
+     <nav class="navbar">
+         <div class="logo">
+             <div class="logo-3d">
+                 <span class="logo-icon"><i class="fas fa-skull-crossbones"></i></span>
+                 <span class="logo-text">The Dark World</span>
+             </div>
+         </div>
+         <ul class="nav-links">
+              <li><a href="#home" class="nav-link active" data-page="home">
+                  <span class="nav-icon"><i class="fas fa-home"></i></span>
+                  <span>Home</span>
+              </a></li>
+              <li><a href="#about" class="nav-link" data-page="about">
+                  <span class="nav-icon"><i class="fas fa-gamepad"></i></span>
+                  <span>About</span>
+              </a></li>
+              <li><a href="#story" class="nav-link" data-page="story">
+                  <span class="nav-icon"><i class="fas fa-book-skull"></i></span>
+                  <span>Story</span>
+              </a></li>
+              <li><a href="#enemies" class="nav-link" data-page="enemies">
+                  <span class="nav-icon"><i class="fas fa-biohazard"></i></span>
+                  <span>Enemies</span>
+              </a></li>
+              <li><a href="#features" class="nav-link" data-page="features">
+                  <span class="nav-icon"><i class="fas fa-khanda"></i></span>
+                  <span>Features</span>
+              </a></li>
+              <li><a href="#gallery" class="nav-link" data-page="gallery">
+                  <span class="nav-icon"><i class="fas fa-images"></i></span>
+                  <span>Gallery</span>
+              </a></li>
+          </ul>
+           <div class="nav-auth">
+                <!-- User account dropdown will be inserted here by JavaScript -->
+                <div class="user-account" id="userAccount">
+                    <!-- When logged in, this will show the user's name and a dropdown -->
+                    <!-- When not logged in, it will show login button -->
+                    <button id="loginBtn" class="btn-auth"><i class="fas fa-sign-in-alt"></i> Login</button>
+                    <button id="logoutBtn" class="btn-auth hidden"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                </div>
             </div>
-        </div>
-        <ul class="nav-links">
-            <li><a href="#home" class="nav-link active" data-page="home">
-                <span class="nav-icon"><i class="fas fa-home"></i></span>
-                <span>Home</span>
-            </a></li>
-            <li><a href="#about" class="nav-link" data-page="about">
-                <span class="nav-icon"><i class="fas fa-gamepad"></i></span>
-                <span>About</span>
-            </a></li>
-            <li><a href="#story" class="nav-link" data-page="story">
-                <span class="nav-icon"><i class="fas fa-book-skull"></i></span>
-                <span>Story</span>
-            </a></li>
-            <li><a href="#enemies" class="nav-link" data-page="enemies">
-                <span class="nav-icon"><i class="fas fa-biohazard"></i></span>
-                <span>Enemies</span>
-            </a></li>
-            <li><a href="#features" class="nav-link" data-page="features">
-                <span class="nav-icon"><i class="fas fa-khanda"></i></span>
-                <span>Features</span>
-            </a></li>
-            <li><a href="#gallery" class="nav-link" data-page="gallery">
-                <span class="nav-icon"><i class="fas fa-images"></i></span>
-                <span>Gallery</span>
-            </a></li>
-            <li><a href="#join" class="nav-link" data-page="join">
-                <span class="nav-icon"><i class="fas fa-user-plus"></i></span>
-                <span>Join</span>
-            </a></li>
-        </ul>
-        <div class="nav-auth">
-            <div class="user-info-mini" id="userInfoMini">
-                <span class="user-score"><i class="fas fa-trophy"></i> <span id="userScore">0</span></span>
-            </div>
-            <button id="loginBtn" class="btn-auth"><i class="fas fa-sign-in-alt"></i> Login</button>
-            <button id="logoutBtn" class="btn-auth hidden"><i class="fas fa-sign-out-alt"></i> Logout</button>
-        </div>
-        <div class="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </nav>
+         <div class="hamburger">
+             <span></span>
+             <span></span>
+             <span></span>
+         </div>
+     </nav>
 
     <!-- Mobile Menu -->
     <div class="mobile-menu">
@@ -117,7 +115,6 @@
             <li><a href="#enemies"><i class="fas fa-biohazard"></i> Enemies</a></li>
             <li><a href="#features"><i class="fas fa-khanda"></i> Features</a></li>
             <li><a href="#gallery"><i class="fas fa-images"></i> Gallery</a></li>
-            <li><a href="#join"><i class="fas fa-user-plus"></i> Join</a></li>
             <li><a href="pages/missions.html"><i class="fas fa-tasks"></i> Missions</a></li>
         </ul>
     </div>
@@ -140,20 +137,21 @@
                             <span class="badge-text">Official Game Portal</span>
                         </div>
                         <h1 class="hero-title">
-                            <span class="title-line title-line-1">Survive</span>
-                            <span class="title-line title-line-2">The Horde</span>
-                        </h1>
+                             <span class="title-line title-line-1">Survive</span>
+                             <span class="title-line title-line-2">The Horde</span>
+                             <span class="title-decoration"></span>
+                         </h1>
                         <p class="hero-subtitle">The world has fallen. Humanity's last stand begins now. Join the resistance and fight for survival in the ultimate zombie apocalypse experience.</p>
                         <div class="hero-buttons">
-                            <a href="#" id="heroRegisterBtn" class="btn-primary btn-play">
-                                <span class="btn-icon"><i class="fas fa-credit-card"></i></span>
-                                <span class="btn-text">Submit 500 PKR to Join</span>
-                            </a>
-                            <a href="pages/about.html" class="btn-secondary">
-                                <span class="btn-text">Learn More</span>
-                                <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
-                            </a>
-                        </div>
+                             <a href="#" id="heroRegisterBtn" class="btn-primary btn-play">
+                                 <span class="btn-icon"><i class="fas fa-user-plus"></i></span>
+                                 <span class="btn-text">JOIN THE RESISTANCE</span>
+                             </a>
+                             <a href="pages/about.html" class="btn-secondary">
+                                 <span class="btn-text">Learn More</span>
+                                 <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
+                             </a>
+                         </div>
                         <div class="hero-stats">
                             <div class="stat-item">
                                 <span class="stat-value" data-count="1000000">0</span>
@@ -701,13 +699,6 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="loginWhatsapp">WhatsApp Number</label>
-                    <div class="input-wrapper">
-                        <i class="fab fa-whatsapp"></i>
-                        <input type="tel" id="loginWhatsapp" name="loginWhatsapp" placeholder="+92 000 000 0000">
-                    </div>
-                </div>
-                <div class="form-group">
                     <label for="loginPassword">Password</label>
                     <div class="input-wrapper">
                         <i class="fas fa-lock"></i>
@@ -744,17 +735,17 @@
             </div>
             <form id="registerForm" class="register-form">
                 <div class="form-group">
+                    <label for="regUsername">Username</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="regUsername" name="regUsername" placeholder="Choose a username" required>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label for="regEmail">Email Address</label>
                     <div class="input-wrapper">
                         <i class="fas fa-envelope"></i>
                         <input type="email" id="regEmail" name="regEmail" placeholder="survivor@email.com" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="regWhatsapp">WhatsApp Number</label>
-                    <div class="input-wrapper">
-                        <i class="fab fa-whatsapp"></i>
-                        <input type="tel" id="regWhatsapp" name="regWhatsapp" placeholder="+92 000 000 0000" required>
                     </div>
                 </div>
                 <div class="form-group">
@@ -772,13 +763,19 @@
                     </div>
                 </div>
                 <button type="submit" class="btn-register">
-                    <span><i class="fas fa-user-plus"></i> REGISTER</span>
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <!-- User Dashboard Panel -->
+                                     <span><i class="fas fa-user-plus"></i> REGISTER</span>
+                                 </button>
+                             </form>
+                             <div class="auth-divider">
+                                 <span>Already have an account?</span>
+                             </div>
+                             <button id="showLoginFromRegister" class="btn-login-switch">
+                                 <span><i class="fas fa-sign-in-alt"></i> LOGIN NOW</span>
+                             </button>
+                         </div>
+                     </div>
+     
+                     <!-- User Dashboard Panel -->
     <div id="dashboard" class="dashboard-panel hidden">
         <div class="dashboard-header">
             <div class="dashboard-user">
@@ -828,14 +825,16 @@
     <script src="env.js"></script>
     
     <!-- Firebase SDK (Compatibility Version) -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
     
     <!-- Firebase Config -->
     <script src="firebase-config.js"></script>
-    
+
+    <!-- Email Service Module (Express + Nodemailer — silent automatic delivery) -->
+    <script src="js/email-service.js"></script>
+
     <!-- Main JavaScript -->
     <script src="js/main.js"></script>
 </body>

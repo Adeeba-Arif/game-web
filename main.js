@@ -291,14 +291,14 @@ function initForms() {
                     // Create user with Firebase
                     const userCredential = await auth.createUserWithEmailAndPassword(email, password);
                     const user = userCredential.user;
-                    
+
                     // Save additional user data to Firestore
                     await db.collection('users').doc(user.uid).set({
                         email: email,
                         whatsapp: whatsapp,
                         createdAt: firebase.firestore.FieldValue.serverTimestamp()
                     });
-                    
+
                     showAlert('Account created successfully!', 'success');
                     registerForm.reset();
                     showDashboard(user, whatsapp);

@@ -73,6 +73,54 @@ Simply open `index.html` in a browser. The website works in demo mode without Fi
 - **Waleed Manzoor** - Lead Creator & Visionary
 - **Adeeba Arif** - Creative Director & Writer
 
+## 📧 Email Service
+
+This project uses a **local Express + Nodemailer server** to send emails silently and automatically through your Gmail account. No third-party email API keys required.
+
+### Architecture
+
+```
+Browser (email-service.js)
+    │  POST /api/send-email  (JSON)
+    ▼
+Local Server (email-server.js + Nodemailer)
+    │  SMTP
+    ▼
+Gmail (thedarkworld.8304@gmail.com)
+```
+
+### One-Time Setup (5 minutes)
+
+1. **Get a Gmail App Password** (this is a 16-character code, NOT your regular Gmail password):
+   - Open https://myaccount.google.com/security
+   - Turn **ON** 2-Step Verification (if not already on)
+   - Scroll to **"How you sign in to Google"** → click **App passwords**
+   - Choose: **App = Mail**, **Device = Other (Custom name)**
+   - Type a name (e.g. `The Dark World Website`) → click **Generate**
+   - Google shows a **16-character code** like `abcd efgh ijkl mnop`
+   - Copy it (without spaces) and paste it into [`.env`](.env) as `SMTP_PASS`
+
+2. **Start the email server** (keep this terminal open while using the site):
+   ```
+   npm run start:email
+   ```
+   You should see: `[EmailServer] Running on http://localhost:3001`
+
+3. **Open the website** in your browser — emails now send automatically on registration and login.
+
+### How It Works
+
+- **Registration** → user gets a welcome email + admin gets a new-player notification (both sent in parallel, silently)
+- **Login** → admin gets a login notification email (silent)
+- **Profile page** → "Test Email" button sends a test email instantly
+- If the server is not running, it gracefully falls back to opening the user's email client via `mailto:`
+
+### Testing
+
+- Click the **Test Email** button on the Profile page
+- Register a new account — both confirmation emails fire automatically
+- Check the browser console for `[EmailService]` logs and the server terminal for `[EmailServer]` logs
+
 ## 📄 License
 
 Copyright © 2026 The Dark World. All rights reserved.
