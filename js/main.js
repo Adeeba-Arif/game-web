@@ -573,7 +573,7 @@ async function handleLogin(e) {
     }
     
     try {
-        showToast('Logging in...', 'info');
+        // Removed login toast;
         
         const userCredential = await auth.signInWithEmailAndPassword(email, password);
         const user = userCredential.user;
@@ -607,7 +607,7 @@ async function handleLogin(e) {
         }, 1500);
     } catch (error) {
         console.error('Login error:', error);
-        showToast(getAuthErrorMessage(error.code), 'error');
+        // Removed error toast;
     }
 }
 
@@ -660,7 +660,7 @@ async function handleRegister(e) {
             return;
         }
         
-        showToast('Creating account...', 'info');
+        // Removed register toast;
         
         const userCredential = await auth.createUserWithEmailAndPassword(email, password);
         console.log('User created:', userCredential.user);
@@ -714,7 +714,7 @@ async function handleRegister(e) {
        console.error('Registration error:', error);
        console.error('Error code:', error.code);
        console.error('Error message:', error.message);
-       showToast(getAuthErrorMessage(error.code), 'error');
+       // Removed error toast;
    }
 }
 
@@ -746,7 +746,7 @@ async function handleGoogleAuth() {
         }, 1500);
     } catch (error) {
         console.error('Google auth error:', error);
-        showToast(getAuthErrorMessage(error.code), 'error');
+        // Removed error toast;
     }
 }
 
@@ -1195,3 +1195,4 @@ window.ZSurvival = {
     DEMO_MODE,
     showPaymentInstructions
 };
+
